@@ -18,9 +18,9 @@ export default function BookingForm() {
 
   return (
     <section id="booking" className="py-12 px-4 -mt-12 z-50 relative">
-      <div className="max-w-4xl mx-auto bg-black/70 backdrop-blur-md border border-gold/20 rounded-lg p-6 shadow-lg">
-        <h3 className="text-2xl font-serif font-bold text-white mb-4">Reserve Your Stay</h3>
-        <p className="text-sm text-gray-300 mb-6">Select your dates and number of guests, then check availability.</p>
+      <div className="max-w-4xl mx-auto bg-white/90 backdrop-blur-sm border border-gold/10 rounded-lg p-6 shadow-lg">
+        <h3 className="text-2xl md:text-3xl font-serif font-bold text-gold mb-2 text-center gold-glow">Reserve Your Stay</h3>
+        <p className="text-sm text-gray-600 mb-6 text-center">Select your dates and number of guests, then check availability.</p>
 
         <form
           onSubmit={(e) => {
@@ -46,7 +46,7 @@ export default function BookingForm() {
               value={checkIn}
               min={todayStr}
               onChange={(e) => setCheckIn(e.target.value)}
-              className="w-full px-3 py-2 rounded bg-gray-800 text-white border border-gray-700"
+              className="w-full px-3 py-2 rounded bg-gray-100 text-textPrimary border border-gray-300"
               required
             />
           </div>
@@ -58,7 +58,7 @@ export default function BookingForm() {
               value={checkOut}
               min={checkIn || todayStr}
               onChange={(e) => setCheckOut(e.target.value)}
-              className="w-full px-3 py-2 rounded bg-gray-800 text-white border border-gray-700"
+              className="w-full px-3 py-2 rounded bg-gray-100 text-textPrimary border border-gray-300"
               required
             />
           </div>
@@ -68,7 +68,7 @@ export default function BookingForm() {
             <select
               value={adults}
               onChange={(e) => setAdults(Number(e.target.value))}
-              className="w-full px-3 py-2 rounded bg-gray-800 text-white border border-gray-700"
+              className="w-full px-3 py-2 rounded bg-gray-100 text-textPrimary border border-gray-300"
             >
               <option value={1}>1 Adult</option>
               <option value={2}>2 Adults</option>
@@ -76,7 +76,7 @@ export default function BookingForm() {
           </div>
 
           <div>
-            <button type="submit" className="w-full px-4 py-2 bg-gold text-darkBg font-bold rounded hover:bg-darkGold transition-colors">Check Availability</button>
+            <button type="submit" className="w-full px-4 py-2 bg-gold text-textPrimary font-bold rounded hover:bg-darkGold transition-colors">Check Availability</button>
           </div>
         </form>
       </div>

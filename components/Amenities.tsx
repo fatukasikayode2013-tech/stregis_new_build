@@ -1,4 +1,4 @@
-'use client';
+ 'use client';
 
 export default function Amenities() {
   const amenities = [
@@ -12,11 +12,7 @@ export default function Amenities() {
       title: 'Fitness Center',
       description: 'State-of-the-art equipment and personal training services available'
     },
-    {
-      icon: 'fas fa-spa',
-      title: 'Wellness Spa',
-      description: 'Complete spa treatments including massage, sauna, and steam room'
-    },
+    // Spa removed per request
     {
       icon: 'fas fa-utensils',
       title: 'Fine Dining',
@@ -45,7 +41,7 @@ export default function Amenities() {
   ];
 
   return (
-    <section id="amenities" className="py-20 md:py-32 px-4 bg-darkBg">
+    <section id="amenities" className="py-20 md:py-32 px-4 bg-lightBg">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16 fade-in-up">

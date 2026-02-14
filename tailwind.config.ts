@@ -10,8 +10,9 @@ const config: Config = {
     extend: {
       colors: {
         gold: '#D4AF37',
-        darkGold: '#8B7500',
-        darkBg: '#0F0F0F',
+        darkGold: '#8B6B00',
+        lightBg: '#FBFBF9',
+        textPrimary: '#0b1220',
         lightGray: '#F5F5F5',
       },
       fontFamily: {

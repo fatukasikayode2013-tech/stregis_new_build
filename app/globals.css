@@ -13,9 +13,9 @@ html {
 }
 
 body {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  background-color: #0f0f0f;
-  color: #ffffff;
+  font-family: 'Poppins', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background-color: #FBFBF9; /* light luxury ivory */
+  color: #0b1220; /* dark text for contrast */
   overflow-x: hidden;
 }
 
@@ -25,7 +25,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: #f3f3f3;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -34,7 +34,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #8B7500;
+  background: #8B6B00;
 }
 
 /* Luxury animations */
@@ -80,6 +80,90 @@ body {
   }
 }
 
+/* Marquee/Scroll Animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Shimmer Effect for Gold Text */
+@keyframes shimmer {
+  0% {
+    background-position: -2000px 0;
+  }
+  100% {
+    background-position: 2000px 0;
+  }
+}
+
+/* Letter-by-Letter Reveal */
+@keyframes letterReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Floating Animation */
+@keyframes floating {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Parallax Effect */
+@keyframes parallaxFloat {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(30px);
+  }
+}
+
+/* Pulse Glow */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(212, 175, 55, 0.6);
+  }
+}
+
+/* Count Up Animation */
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Scale Bounce */
+@keyframes scaleBounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
 .fade-in-up {
   animation: fadeInUp 0.8s ease-out;
 }
@@ -94,6 +178,71 @@ body {
 
 .gold-glow {
   animation: glow 3s ease-in-out infinite;
+}
+
+/* Marquee Animation */
+.marquee {
+  animation: marquee 60s linear infinite;
+  will-change: transform;
+}
+
+/* Pause on hover for professional control */
+.marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Inner wrapper keeps spacing tidy */
+.marquee-inner {
+  display: inline-flex;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+/* Shimmer Effect - applies to gold text elements */
+.shimmer-effect {
+  background: linear-gradient(
+    90deg,
+    #D4AF37 0%,
+    #FFE680 25%,
+    #D4AF37 50%,
+    #FFE680 75%,
+    #D4AF37 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Letter Reveal for Headlines */
+.letter-reveal {
+  animation: letterReveal 0.6s ease-out forwards;
+}
+
+/* Floating Animation for Headers */
+.floating-header {
+  animation: floating 3s ease-in-out infinite;
+}
+
+/* Parallax effect on scroll */
+.parallax-element {
+  animation: parallaxFloat 2s ease-out forwards;
+}
+
+/* Pulse Glow for CTAs */
+.pulse-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* Count Up for Numbers */
+.count-up {
+  animation: countUp 0.6s ease-out forwards;
+}
+
+/* Scale Bounce for Interactive Elements */
+.scale-bounce {
+  animation: scaleBounce 1s ease-in-out infinite;
 }
 
 /* Luxury text styles */
@@ -130,12 +279,28 @@ body {
 /* Make hero video fill viewport width while keeping height auto and centered */
 .hero-video {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 100vw;
-  height: auto;
-  transform: translate(-50%, -50%);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translateY(0);
   max-width: none;
+}
+
+/* Respect user's reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    animation: none !important;
+  }
+  .fade-in-up,
+  .slide-in-left,
+  .slide-in-right,
+  .floating-header,
+  .pulse-glow,
+  .scale-bounce {
+    animation: none !important;
+    transition: none !important;
+  }
 }
 
 .video-overlay {
@@ -144,7 +309,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(11, 18, 32, 0.06);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -154,15 +319,44 @@ body {
 /* Navbar fixed scroll effect */
 .navbar-scrolled {
   background-color: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 30px rgba(11,18,32,0.06);
   padding: 12px 0;
 }
 
 .navbar-scrolled a,
 .navbar-scrolled span {
-  color: #0f0f0f !important;
+  color: #0b1220 !important;
 }
 
 .navbar-scrolled .gold-text {
-  color: #8B7500 !important;
+  color: #8B6B00 !important;
+}
+
+/* Glass Morphism Effect */
+.glass-morphism {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(212, 175, 55, 0.1);
+}
+
+.glass-morphism-dark {
+  background: rgba(15, 15, 15, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(212, 175, 55, 0.15);
+}
+
+/* Scroll Reveal - Elements hidden until scrolled into view */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
+}
+
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
 }

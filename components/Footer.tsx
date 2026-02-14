@@ -1,4 +1,4 @@
-'use client';
+ 'use client';
 
 import Link from 'next/link';
 
@@ -6,10 +6,10 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-black border-t border-gold/20">
+    <footer className="bg-white border-t border-gold/20">
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 py-16 md:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12 text-textPrimary">
           {/* About Section */}
           <div className="fade-in-up">
             <div className="flex items-center gap-4 mb-4">
@@ -18,16 +18,16 @@ export default function Footer() {
                 ST<span className="gold-text"> REGIS</span>
               </h3>
             </div>
-            <p className="text-gray-400 text-sm leading-relaxed mb-6">
+              <p className="text-gray-600 text-sm leading-relaxed mb-6">
               Experience unparalleled luxury and sophistication at St Regis Hotel and Resort. Your destination for world-class hospitality.
             </p>
             {/* Social Media Links */}
-            <div className="flex gap-4">
+              <div className="flex gap-4">
               <a
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-900 hover:bg-gold hover:text-darkBg transition-all duration-300 text-gold"
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gold hover:text-textPrimary transition-all duration-300 text-gold"
               >
                 <i className="fab fa-facebook-f"></i>
               </a>
@@ -35,7 +35,7 @@ export default function Footer() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-900 hover:bg-gold hover:text-darkBg transition-all duration-300 text-gold"
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gold hover:text-textPrimary transition-all duration-300 text-gold"
               >
                 <i className="fab fa-instagram"></i>
               </a>
@@ -43,7 +43,7 @@ export default function Footer() {
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-900 hover:bg-gold hover:text-darkBg transition-all duration-300 text-gold"
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gold hover:text-textPrimary transition-all duration-300 text-gold"
               >
                 <i className="fab fa-twitter"></i>
               </a>
@@ -51,7 +51,7 @@ export default function Footer() {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-900 hover:bg-gold hover:text-darkBg transition-all duration-300 text-gold"
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gold hover:text-textPrimary transition-all duration-300 text-gold"
               >
                 <i className="fab fa-linkedin-in"></i>
               </a>
@@ -59,7 +59,7 @@ export default function Footer() {
                 href="https://youtube.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-900 hover:bg-gold hover:text-darkBg transition-all duration-300 text-gold"
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gold hover:text-textPrimary transition-all duration-300 text-gold"
               >
                 <i className="fab fa-youtube"></i>
               </a>
@@ -154,11 +154,7 @@ export default function Footer() {
                 <span className="text-gold">6 AM - 11 PM</span>
               </div>
               <div className="h-px bg-gray-700"></div>
-              <div className="flex justify-between items-center">
-                <span>Spa</span>
-                <span className="text-gold">7 AM - 10 PM</span>
-              </div>
-              <div className="h-px bg-gray-700"></div>
+              {/* Spa removed per request */}
               <div className="flex justify-between items-center">
                 <span>Pool</span>
                 <span className="text-gold">6 AM - 8 PM</span>
