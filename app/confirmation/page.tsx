@@ -5,11 +5,6 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { useSearchParams } from 'next/navigation';
 
-export const metadata = {
-  title: 'Booking Confirmation - St. Regis',
-  description: 'Your booking has been confirmed at St. Regis Hotel & Resort',
-};
-
 export default function ConfirmationPage() {
   const searchParams = useSearchParams();
   const name = searchParams.get('name') || '[Guest Name]';
