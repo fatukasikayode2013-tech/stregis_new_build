@@ -9,10 +9,10 @@ export default function Hero() {
   };
 
   return (
-    <section id="hero" className="relative h-screen flex items-center justify-center">
+    <section id="hero" className="relative h-[75vh] sm:h-[80vh] flex items-center justify-center">
       {/* Background Video */}
       <video
-        className="absolute inset-0 w-full h/full object-cover"
+        className="absolute inset-0 w-full h-full object-cover object-top"
         src="/videos/pool.mp4"
         autoPlay
         muted
