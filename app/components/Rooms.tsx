@@ -3,7 +3,16 @@
 import { Users, Maximize } from 'lucide-react';
 
 export default function Rooms() {
-  const rooms = [
+  type Room = {
+    name: string;
+    images: string[];
+    description: string;
+    size: string;
+    occupancy: string;
+    price: string;
+  };
+
+  const rooms: Room[] = [
     {
       name: 'Standard Room',
       images: ['/pics/Standard Deluxe.jpeg'],
@@ -96,7 +105,7 @@ export default function Rooms() {
               {/* Image */}
               <div className="relative h-64 overflow-hidden">
                 <img
-                  src={room.images ? room.images[0] : room.image}
+                  src={room.images[0]}
                   alt={room.name}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
