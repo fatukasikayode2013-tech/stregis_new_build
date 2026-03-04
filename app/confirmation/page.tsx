@@ -1,7 +1,6 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { Suspense } from 'react';
 import ConfirmationContent from './ConfirmationContent';
 
 export const metadata = {
@@ -13,9 +12,7 @@ export default function ConfirmationPage() {
   return (
     <>
       <Navbar />
-      <Suspense fallback={<div>Loading...</div>}>
-        <ConfirmationContent />
-      </Suspense>
+      <ConfirmationContent />
       <Footer />
     </>
   );
