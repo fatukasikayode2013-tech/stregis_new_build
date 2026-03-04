@@ -1,18 +1,27 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 export default function ConfirmationPage() {
-  const urlParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : new URLSearchParams();
-  const name = urlParams.get('name') || '[Guest Name]';
-  const email = urlParams.get('email') || '[guest@email.com]';
-  const phone = urlParams.get('phone') || '[Phone Number]';
-  const checkin = urlParams.get('checkin') || '[Check-in Date]';
-  const checkout = urlParams.get('checkout') || '[Check-out Date]';
-  const roomType = urlParams.get('roomType') || '[Room Type]';
+  const [name, setName] = useState('[Guest Name]');
+  const [email, setEmail] = useState('[guest@email.com]');
+  const [phone, setPhone] = useState('[Phone Number]');
+  const [checkin, setCheckin] = useState('[Check-in Date]');
+  const [checkout, setCheckout] = useState('[Check-out Date]');
+  const [roomType, setRoomType] = useState('[Room Type]');
   const guests = '2'; // Default since not in form
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    setName(urlParams.get('name') || '[Guest Name]');
+    setEmail(urlParams.get('email') || '[guest@email.com]');
+    setPhone(urlParams.get('phone') || '[Phone Number]');
+    setCheckin(urlParams.get('checkin') || '[Check-in Date]');
+    setCheckout(urlParams.get('checkout') || '[Check-out Date]');
+    setRoomType(urlParams.get('roomType') || '[Room Type]');
+  }, []);
 
   return (
     <>
