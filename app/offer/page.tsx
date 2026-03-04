@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 export const metadata = {
   title: 'Special Offer - St. Regis',
@@ -50,5 +51,7 @@ export default function OfferPage() {
         </div>
       </div>
     </section>
+      <Footer />
+    </>
   );
 }
