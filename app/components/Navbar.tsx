@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { Menu, X, Phone } from 'lucide-react';
 
 export default function Navbar() {
@@ -59,6 +60,9 @@ export default function Navbar() {
             <button onClick={() => scrollToSection('events')} className="text-[#1e3a5f] hover:text-[#c9a961] transition-colors">
               Events
             </button>
+            <Link href="/offer" className="text-[#1e3a5f] hover:text-[#c9a961] transition-colors">
+              Offers
+            </Link>
             <button onClick={() => scrollToSection('contact')} className="text-[#1e3a5f] hover:text-[#c9a961] transition-colors">
               Contact
             </button>
@@ -106,6 +110,9 @@ export default function Navbar() {
               <button onClick={() => scrollToSection('events')} className="text-left text-[#1e3a5f] hover:text-[#c9a961]">
                 Events
               </button>
+              <a href="/offer" className="text-left text-[#1e3a5f] hover:text-[#c9a961]">
+                Offers
+              </a>
               <button onClick={() => scrollToSection('contact')} className="text-left text-[#1e3a5f] hover:text-[#c9a961]">
                 Contact
               </button>
