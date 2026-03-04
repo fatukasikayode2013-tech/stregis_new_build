@@ -21,11 +21,11 @@ export default function OfferPage() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8 items-center">
-          <div className="relative w-full">
+          <div className="relative w-full aspect-[4/3]">
             <img
               src="/images/offer.jpeg"
               alt="Special Offer"
-              className="w-full h-[420px] object-cover rounded-2xl shadow-lg"
+              className="absolute inset-0 w-full h-full object-cover rounded-2xl shadow-lg"
             />
             <span className="absolute top-3 right-3 bg-[#c9a961] text-white px-3 py-1 rounded-full text-sm font-semibold">Active</span>
           </div>
