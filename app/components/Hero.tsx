@@ -22,7 +22,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-black/40"></div>
 
       {/* Content */}
-      <div className="relative z-10 text-center text-white px-4 max-w-5xl">
+      <div className="relative z-10 text-center text-white px-4 max-w-5xl pt-16 sm:pt-24 md:pt-32">
         <h1
           className="text-5xl md:text-6xl lg:text-7xl mb-6"
           style={{ fontFamily: 'Playfair Display, serif' }}
