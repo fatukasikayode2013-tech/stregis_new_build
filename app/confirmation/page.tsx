@@ -3,16 +3,15 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { useSearchParams } from 'next/navigation';
 
 export default function ConfirmationPage() {
-  const searchParams = useSearchParams();
-  const name = searchParams.get('name') || '[Guest Name]';
-  const email = searchParams.get('email') || '[guest@email.com]';
-  const phone = searchParams.get('phone') || '[Phone Number]';
-  const checkin = searchParams.get('checkin') || '[Check-in Date]';
-  const checkout = searchParams.get('checkout') || '[Check-out Date]';
-  const roomType = searchParams.get('roomType') || '[Room Type]';
+  const urlParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : new URLSearchParams();
+  const name = urlParams.get('name') || '[Guest Name]';
+  const email = urlParams.get('email') || '[guest@email.com]';
+  const phone = urlParams.get('phone') || '[Phone Number]';
+  const checkin = urlParams.get('checkin') || '[Check-in Date]';
+  const checkout = urlParams.get('checkout') || '[Check-out Date]';
+  const roomType = urlParams.get('roomType') || '[Room Type]';
   const guests = '2'; // Default since not in form
 
   return (
