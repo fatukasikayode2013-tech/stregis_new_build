@@ -10,8 +10,8 @@ export async function POST(request: Request) {
     const data = await request.json();
     const { name, email, phone, checkin, checkout, roomType, message } = data;
 
-    const user = process.env.ZOHO_USER;
-    const pass = process.env.ZOHO_PASS;
+    const user = process.env.SMTP_USER || process.env.ZOHO_USER;
+    const pass = process.env.SMTP_PASS || process.env.ZOHO_PASS;
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || `http://localhost:3000`;
 
     if (!user || !pass) {
@@ -26,9 +26,9 @@ export async function POST(request: Request) {
     const token = randomUUID();
     await saveReservation(token, { name, email, phone, checkin, checkout, roomType, message });
 
-    const host = process.env.ZOHO_HOST || 'smtp.zoho.com';
-    const port = parseInt(process.env.ZOHO_PORT || '587', 10);
-    const secure = (process.env.ZOHO_SECURE === 'true') || port === 465;
+    const host = process.env.SMTP_HOST || process.env.ZOHO_HOST || 'smtp.zoho.com';
+    const port = parseInt(process.env.SMTP_PORT || process.env.ZOHO_PORT || '587', 10);
+    const secure = (process.env.SMTP_SECURE || process.env.ZOHO_SECURE === 'true') || port === 465;
 
     const transporter = nodemailer.createTransport({
       host,

@@ -75,7 +75,7 @@ export default function Navbar() {
               <span>0906 000 1732</span>
             </a>
             <button
-              onClick={() => scrollToSection('contact')}
+              onClick={() => window.location.href = '/#contact'}
               className="bg-[#c9a961] text-white px-6 py-2.5 rounded-lg hover:bg-[#b89851] transition-all hover:shadow-lg"
             >
               Book Now
@@ -121,7 +121,7 @@ export default function Navbar() {
                 <span>0906 000 1732</span>
               </a>
               <button
-                onClick={() => scrollToSection('contact')}
+                onClick={() => window.location.href = '/#contact'}
                 className="bg-[#c9a961] text-white px-6 py-2.5 rounded-lg hover:bg-[#b89851] transition-all text-left"
               >
                 Book Now

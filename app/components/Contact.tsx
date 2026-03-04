@@ -1,11 +1,13 @@
 "use client"
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 
 export default function Contact() {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<string | null>(null);
+  const router = useRouter();
 
   // Get today's date in YYYY-MM-DD format
   const getTodayDate = () => {
@@ -129,6 +131,8 @@ export default function Contact() {
                   // we sent a verification email to the guest
                   setStatus('verification-sent');
                   form.reset();
+                  // Redirect to confirmation page
+                  router.push('/confirmation');
                 } else {
                   setStatus(json.error || 'error');
                 }

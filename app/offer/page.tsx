@@ -48,7 +48,7 @@ export default function OfferPage() {
             </ul>
 
             <div className="mt-6">
-              <a href="#contact" className="inline-block bg-[#c9a961] text-white px-6 py-3 rounded-lg hover:bg-[#b89851]">Book Now</a>
+              <a href="/#contact" className="inline-block bg-[#c9a961] text-white px-6 py-3 rounded-lg hover:bg-[#b89851]">Book Now</a>
             </div>
           </div>
         </div>
