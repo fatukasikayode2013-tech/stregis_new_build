@@ -1,6 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
 
 * {
   margin: 0;
@@ -8,36 +14,37 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
-  font-family: 'Poppins', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  background-color: #FBFBF9; /* light luxury ivory */
-  color: #0b1220; /* dark text for contrast */
-  overflow-x: hidden;
+  font-family: 'Inter', sans-serif;
+  background-color: #ffffff;
+  color: #1e3a5f;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
 }
 
-::-webkit-scrollbar-track {
-  background: #f3f3f3;
+/* Smooth transitions */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #D4AF37;
-  border-radius: 5px;
+/* Gold text styling */
+.text-gold {
+  color: #c9a961;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #8B6B00;
+.hover\:text-gold:hover {
+  color: #c9a961;
 }
 
-/* Luxury animations */
+/* Gold glow effect */
+.gold-glow {
+  color: #c9a961;
+  text-shadow: 0 0 20px rgba(201, 169, 97, 0.5);
+}
+
+/* Animations */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -49,314 +56,34 @@ body {
   }
 }
 
-@keyframes slideInFromLeft {
+@keyframes slideInDown {
   from {
     opacity: 0;
-    transform: translateX(-50px);
+    transform: translateY(-30px);
   }
   to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInFromRight {
-  from {
-    opacity: 0;
-    transform: translateX(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes glow {
-  0%, 100% {
-    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
-  }
-  50% {
-    text-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
-  }
-}
-
-/* Marquee/Scroll Animation */
-@keyframes marquee {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
-
-/* Shimmer Effect for Gold Text */
-@keyframes shimmer {
-  0% {
-    background-position: -2000px 0;
-  }
-  100% {
-    background-position: 2000px 0;
-  }
-}
-
-/* Letter-by-Letter Reveal */
-@keyframes letterReveal {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-/* Floating Animation */
-@keyframes floating {
+@keyframes pulse-gold {
   0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-/* Parallax Effect */
-@keyframes parallaxFloat {
-  0% {
-    transform: translateY(0px);
-  }
-  100% {
-    transform: translateY(30px);
-  }
-}
-
-/* Pulse Glow */
-@keyframes pulseGlow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 40px rgba(212, 175, 55, 0.6);
-  }
-}
-
-/* Count Up Animation */
-@keyframes countUp {
-  from {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  to {
     opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Scale Bounce */
-@keyframes scaleBounce {
-  0%, 100% {
-    transform: scale(1);
   }
   50% {
-    transform: scale(1.05);
+    opacity: 0.7;
   }
 }
 
-.fade-in-up {
-  animation: fadeInUp 0.8s ease-out;
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out;
 }
 
-.slide-in-left {
-  animation: slideInFromLeft 0.8s ease-out;
+.animate-slideInDown {
+  animation: slideInDown 0.6s ease-out;
 }
 
-.slide-in-right {
-  animation: slideInFromRight 0.8s ease-out;
-}
-
-.gold-glow {
-  animation: glow 3s ease-in-out infinite;
-}
-
-/* Marquee Animation */
-.marquee {
-  animation: marquee 60s linear infinite;
-  will-change: transform;
-}
-
-/* Pause on hover for professional control */
-.marquee:hover {
-  animation-play-state: paused;
-}
-
-/* Inner wrapper keeps spacing tidy */
-.marquee-inner {
-  display: inline-flex;
-  gap: 2.5rem;
-  align-items: center;
-}
-
-/* Shimmer Effect - applies to gold text elements */
-.shimmer-effect {
-  background: linear-gradient(
-    90deg,
-    #D4AF37 0%,
-    #FFE680 25%,
-    #D4AF37 50%,
-    #FFE680 75%,
-    #D4AF37 100%
-  );
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shimmer 3s ease-in-out infinite;
-}
-
-/* Letter Reveal for Headlines */
-.letter-reveal {
-  animation: letterReveal 0.6s ease-out forwards;
-}
-
-/* Floating Animation for Headers */
-.floating-header {
-  animation: floating 3s ease-in-out infinite;
-}
-
-/* Parallax effect on scroll */
-.parallax-element {
-  animation: parallaxFloat 2s ease-out forwards;
-}
-
-/* Pulse Glow for CTAs */
-.pulse-glow {
-  animation: pulseGlow 2s ease-in-out infinite;
-}
-
-/* Count Up for Numbers */
-.count-up {
-  animation: countUp 0.6s ease-out forwards;
-}
-
-/* Scale Bounce for Interactive Elements */
-.scale-bounce {
-  animation: scaleBounce 1s ease-in-out infinite;
-}
-
-/* Luxury text styles */
-.luxury-heading {
-  font-family: Georgia, serif;
-  font-weight: 400;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-.gold-text {
-  color: #D4AF37;
-}
-
-/* Video container styles */
-.video-container {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
-
-.video-container video {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-/* fade helper for video element */
-.video-fade {
-  transition: opacity 0.8s ease;
-  opacity: 1;
-}
-
-/* Make hero video fill viewport width while keeping height auto and centered */
-.hero-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transform: translateY(0);
-  max-width: none;
-}
-
-/* Respect user's reduced motion preference */
-@media (prefers-reduced-motion: reduce) {
-  .marquee {
-    animation: none !important;
-  }
-  .fade-in-up,
-  .slide-in-left,
-  .slide-in-right,
-  .floating-header,
-  .pulse-glow,
-  .scale-bounce {
-    animation: none !important;
-    transition: none !important;
-  }
-}
-
-.video-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(11, 18, 32, 0.06);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-}
-
-/* Navbar fixed scroll effect */
-.navbar-scrolled {
-  background-color: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 6px 30px rgba(11,18,32,0.06);
-  padding: 12px 0;
-}
-
-.navbar-scrolled a,
-.navbar-scrolled span {
-  color: #0b1220 !important;
-}
-
-.navbar-scrolled .gold-text {
-  color: #8B6B00 !important;
-}
-
-/* Glass Morphism Effect */
-.glass-morphism {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 32px 0 rgba(212, 175, 55, 0.1);
-}
-
-.glass-morphism-dark {
-  background: rgba(15, 15, 15, 0.5);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(212, 175, 55, 0.2);
-  box-shadow: 0 8px 32px 0 rgba(212, 175, 55, 0.15);
-}
-
-/* Scroll Reveal - Elements hidden until scrolled into view */
-.scroll-reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s ease-out;
-}
-
-.scroll-reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
+.animate-pulse-gold {
+  animation: pulse-gold 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }

@@ -1,19 +1,33 @@
-import Navbar from '@/components/Navbar';
-import Hero from '@/components/Hero';
-import BookingForm from '@/components/BookingForm';
-import RoomsGallery from '@/components/RoomsGallery';
-import Amenities from '@/components/Amenities';
-import Footer from '@/components/Footer';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import About from './components/About';
+import Rooms from './components/Rooms';
+import Amenities from './components/Amenities';
+import Gallery from './components/Gallery';
+import Events from './components/Events';
+import Club from './components/Club';
+import Testimonials from './components/Testimonials';
+import Contact from './components/Contact';
+import CTA from './components/CTA';
+import Footer from './components/Footer';
 
 export default function Home() {
   return (
-    <main className="bg-transparent text-textPrimary">
+    <div className="min-h-screen bg-white">
       <Navbar />
-      <Hero />
-      <BookingForm />
-      <RoomsGallery />
-      <Amenities />
+      <main>
+        <Hero />
+        <About />
+        <Rooms />
+        <Amenities />
+        <Gallery />
+        <Events />
+        <Club />
+        <Testimonials />
+        <Contact />
+        <CTA />
+      </main>
       <Footer />
-    </main>
+    </div>
   );
 }
