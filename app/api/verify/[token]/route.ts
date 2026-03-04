@@ -306,7 +306,16 @@ export async function GET(request: Request, { params }: { params: { token: strin
 
     await deleteReservation(token);
 
-    return NextResponse.redirect(new URL('/?verification=success', siteUrl), { status: 302 });
+    // Redirect to confirmation page with guest details
+    const params = new URLSearchParams({
+      name: entry.name || '',
+      email: entry.email || '',
+      phone: entry.phone || '',
+      checkin: entry.checkin || '',
+      checkout: entry.checkout || '',
+      roomType: entry.roomType || '',
+    });
+    return NextResponse.redirect(new URL(`/confirmation?${params.toString()}`, siteUrl), { status: 302 });
   } catch (err: any) {
     console.error('verify error', err);
     return NextResponse.json({ error: 'Server error' }, { status: 500 });
