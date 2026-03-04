@@ -37,6 +37,9 @@ export default function OfferPage() {
             <p className="text-gray-700 mb-4">
               Enjoy exclusive discounts, complimentary welcome drinks, and priority booking when you reserve during our promotional period. This offer applies to room bookings and event packages booked through our reservations desk.
             </p>
+            <p className="text-gray-500 text-sm">
+              <strong>Offer date:</strong> {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </p>
 
             <ul className="list-disc pl-5 text-gray-700 space-y-2">
               <li>Discounted room rates for single, couple, and group bookings</li>
