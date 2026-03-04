@@ -14,11 +14,6 @@ export async function POST(request: Request) {
     const pass = process.env.SMTP_PASS || process.env.ZOHO_PASS;
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || `http://localhost:3000`;
 
-    console.log('SMTP_USER:', !!process.env.SMTP_USER, 'ZOHO_USER:', !!process.env.ZOHO_USER);
-    console.log('SMTP_PASS:', !!process.env.SMTP_PASS, 'ZOHO_PASS:', !!process.env.ZOHO_PASS);
-    console.log('ZOHO_PASS length:', process.env.ZOHO_PASS?.length);
-    console.log('ZOHO_USER value:', process.env.ZOHO_USER);
-
     if (!user) {
       return NextResponse.json({ ok: false, error: 'SMTP user not configured' }, { status: 500 });
     }
