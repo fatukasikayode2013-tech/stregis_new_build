@@ -14,8 +14,14 @@ export async function POST(request: Request) {
     const pass = process.env.SMTP_PASS || process.env.ZOHO_PASS;
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || `http://localhost:3000`;
 
-    if (!user || !pass) {
-      return NextResponse.json({ ok: false, error: 'SMTP credentials not configured' }, { status: 500 });
+    console.log('SMTP_USER:', !!process.env.SMTP_USER, 'ZOHO_USER:', !!process.env.ZOHO_USER);
+    console.log('SMTP_PASS:', !!process.env.SMTP_PASS, 'ZOHO_PASS:', !!process.env.ZOHO_PASS);
+
+    if (!user) {
+      return NextResponse.json({ ok: false, error: 'SMTP user not configured' }, { status: 500 });
+    }
+    if (!pass) {
+      return NextResponse.json({ ok: false, error: 'SMTP password not configured' }, { status: 500 });
     }
 
     if (!email) {
