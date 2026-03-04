@@ -33,7 +33,7 @@ export default function About() {
           {/* Image */}
           <div className="order-2 lg:order-1">
             <img
-              src="/pics/IMG-20260214-WA0260.jpg.jpeg"
+              src="/images/IMG-20260214-WA0260.jpg.jpeg"
               alt="Hotel Lobby"
               className="w-full h-[500px] object-cover rounded-2xl shadow-xl"
             />

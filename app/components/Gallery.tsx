@@ -3,34 +3,32 @@
 export default function Gallery() {
   const images = [
     {
-      url: '/pics/IMG-20260206-WA0286.jpg.jpeg',
+      url: '/images/IMG-20260206-WA0286.jpg.jpeg',
       title: 'Green Field',
       span: 'col-span-2 row-span-2',
     },
     {
-      url: '/pics/IMG-20260206-WA0296.jpg.jpeg',
+      url: '/images/IMG-20260206-WA0296.jpg.jpeg',
       title: 'Hotel Exterior',
       span: 'col-span-1 row-span-1',
     },
     {
-      url: '/pics/IMG-20260206-WA0363.jpg.jpeg',
+      url: '/images/IMG-20260206-WA0363.jpg.jpeg',
       title: 'Room Design',
       span: 'col-span-1 row-span-1',
     },
     {
-      url: '/pics/IMG-20260214-WA0272.jpg.jpeg',
+      url: '/images/IMG-20260214-WA0272.jpg.jpeg',
       title: 'Interior Walkway',
       span: 'col-span-1 row-span-1',
     },
     {
-      url: '/pics/IMG-20260214-WA0275.jpg.jpeg',
+      url: '/images/IMG-20260214-WA0275.jpg.jpeg',
       title: 'Room Artwork',
       span: 'col-span-1 row-span-1',
     },
     {
-      url: '/pics/WhatsApp Image 2026-02-15 at 21.45.06.jpeg',
-      title: 'Pool Area',
-      span: 'col-span-2 row-span-1',
+      url: '/images/WhatsApp Image 2026-02-15 at 21.45.06.jpeg',
     },
   ];
 

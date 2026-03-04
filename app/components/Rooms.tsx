@@ -15,7 +15,7 @@ export default function Rooms() {
   const rooms: Room[] = [
     {
       name: 'Standard Room',
-      images: ['/pics/Standard Deluxe.jpeg'],
+      images: ['/images/Standard Deluxe.jpeg'],
       description: 'Standard Room (15×12ft)',
       size: '15×12 ft',
       occupancy: '2 Guests',
@@ -23,7 +23,7 @@ export default function Rooms() {
     },
     {
       name: 'Executive Room',
-      images: ['/pics/Executive Room.jpeg'],
+      images: ['/images/Executive Room.jpeg'],
       description: 'Executive Room (18×12ft)',
       size: '18×12 ft',
       occupancy: '2 Guests',
@@ -31,7 +31,7 @@ export default function Rooms() {
     },
     {
       name: 'Executive Deluxe',
-      images: ['/pics/Executive deluxe.jpg.jpeg'],
+      images: ['/images/Executive deluxe.jpg.jpeg'],
       description: 'Executive Deluxe (18×14ft)',
       size: '18×14 ft',
       occupancy: '2-3 Guests',
@@ -39,7 +39,7 @@ export default function Rooms() {
     },
     {
       name: 'Executive Suite',
-      images: ['/pics/IMG-20260214-WA0277.jpg.jpeg'],
+      images: ['/images/IMG-20260214-WA0277.jpg.jpeg'],
       description: 'Executive Suite (20×15ft)',
       size: '20×15 ft',
       occupancy: '3 Guests',
@@ -47,7 +47,7 @@ export default function Rooms() {
     },
     {
       name: 'Royal Suite',
-      images: ['/pics/Royal Room.jpeg', '/pics/Royal Suite.jpeg'],
+      images: ['/images/Royal Room.jpeg', '/images/Royal Suite.jpeg'],
       description: 'Royal Suite (Room and Parlour)',
       size: 'spacious',
       occupancy: '4 Guests',
@@ -55,7 +55,7 @@ export default function Rooms() {
     },
     {
       name: 'Apartment',
-      images: ['/pics/Apartment.jpeg', '/pics/IMG-20260206-WA0292.jpg.jpeg'],
+      images: ['/images/Apartment.jpeg', '/images/IMG-20260206-WA0292.jpg.jpeg'],
       description: 'Full apartment with kitchen, oven, microwave, washing machine, full house settings',
       size: 'full apartment',
       occupancy: '6 Guests',
@@ -63,7 +63,7 @@ export default function Rooms() {
     },
     {
       name: 'Presidential Suite',
-      images: ['/pics/IMG-20260206-WA0293.jpg.jpeg', '/pics/IMG-20260206-WA0294.jpg.jpeg', '/pics/IMG-20260206-WA0297.jpg.jpeg'],
+      images: ['/images/IMG-20260206-WA0293.jpg.jpeg', '/images/IMG-20260206-WA0294.jpg.jpeg', '/images/IMG-20260206-WA0297.jpg.jpeg'],
       description: 'Presidential Suite (Full presidential setting)',
       size: 'luxury suite',
       occupancy: '6+ Guests',
