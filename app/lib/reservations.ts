@@ -36,7 +36,10 @@ async function persistStoreToFile() {
   const ok = await ensureDataFile();
   if (!ok) return false;
   const obj: Record<string, Reservation> = {};
-  for (const [k, v] of store.entries()) obj[k] = v;
+  // avoid downlevelIteration errors by using forEach
+  store.forEach((v, k) => {
+    obj[k] = v;
+  });
   try {
     await fs.writeFile(DATA_FILE, JSON.stringify(obj, null, 2), 'utf8');
     return true;
@@ -88,9 +91,9 @@ export async function deleteReservation(token: string) {
 
 export async function cleanupExpired() {
   const now = Date.now();
-  for (const [k, v] of store.entries()) {
+  store.forEach((v, k) => {
     if (v.expiresAt <= now) store.delete(k);
-  }
+  });
   await persistStoreToFile();
 }
 
