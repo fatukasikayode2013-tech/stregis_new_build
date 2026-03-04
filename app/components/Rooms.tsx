@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react';
 import { Users, Maximize } from 'lucide-react';
 
 export default function Rooms() {
@@ -15,7 +16,7 @@ export default function Rooms() {
   const rooms: Room[] = [
     {
       name: 'Standard Room',
-      images: ['/images/Standard Deluxe.jpeg'],
+      images: ['/images/Standard 1.png', '/images/Standard 2.png', '/images/Standard 3.png', '/images/Standard 4.png'],
       description: 'Standard Room (15×12ft)',
       size: '15×12 ft',
       occupancy: '2 Guests',
@@ -34,7 +35,7 @@ export default function Rooms() {
       images: ['/images/Executive deluxe.jpg.jpeg'],
       description: 'Executive Deluxe (18×14ft)',
       size: '18×14 ft',
-      occupancy: '2-3 Guests',
+      occupancy: '2 Guests',
       price: '₦65,000',
     },
     {
@@ -42,7 +43,7 @@ export default function Rooms() {
       images: ['/images/IMG-20260214-WA0277.jpg.jpeg'],
       description: 'Executive Suite (20×15ft)',
       size: '20×15 ft',
-      occupancy: '3 Guests',
+      occupancy: '2 Guests',
       price: '₦90,000',
     },
     {
@@ -50,7 +51,7 @@ export default function Rooms() {
       images: ['/images/Royal Room.jpeg', '/images/Royal Suite.jpeg'],
       description: 'Royal Suite (Room and Parlour)',
       size: 'spacious',
-      occupancy: '4 Guests',
+      occupancy: '2 Guests',
       price: '₦100,000',
     },
     {
@@ -58,18 +59,66 @@ export default function Rooms() {
       images: ['/images/Apartment.jpeg', '/images/IMG-20260206-WA0292.jpg.jpeg'],
       description: 'Full apartment with kitchen, oven, microwave, washing machine, full house settings',
       size: 'full apartment',
-      occupancy: '6 Guests',
+      occupancy: '2-3 Guests',
       price: '₦160,000',
     },
     {
       name: 'Presidential Suite',
-      images: ['/images/IMG-20260206-WA0293.jpg.jpeg', '/images/IMG-20260206-WA0294.jpg.jpeg', '/images/IMG-20260206-WA0297.jpg.jpeg'],
+      images: ['/images/Presidential bed.jpeg','/images/IMG-20260206-WA0297.jpg.jpeg'],
       description: 'Presidential Suite (Full presidential setting)',
       size: 'luxury suite',
-      occupancy: '6+ Guests',
+      occupancy: '2-3 Guests',
       price: '₦350,000',
     },
   ];
+
+  function RoomCard({ room }: { room: Room }) {
+    const [idx, setIdx] = useState(0);
+
+    useEffect(() => {
+      if (!room.images || room.images.length <= 1) return;
+      const t = setInterval(() => setIdx((i) => (i + 1) % room.images.length), 4000);
+      return () => clearInterval(t);
+    }, [room.images]);
+
+    const prev = () => setIdx((i) => (i - 1 + room.images.length) % room.images.length);
+    const next = () => setIdx((i) => (i + 1) % room.images.length);
+
+    return (
+      <div className="relative h-64 overflow-hidden group">
+        <img
+          src={room.images[idx]}
+          alt={`${room.name} image ${idx + 1}`}
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+        />
+        <div className="absolute inset-0 flex items-end justify-center pb-3 space-x-2">
+          {room.images.map((_, i) => (
+            <button
+              key={i}
+              aria-label={`Go to image ${i + 1}`}
+              onClick={() => setIdx(i)}
+              className={`w-2 h-2 rounded-full ${i === idx ? 'bg-white' : 'bg-white/50'} border-0`}
+            />
+          ))}
+        </div>
+        <div className="absolute inset-y-0 left-2 flex items-center">
+          <button onClick={prev} className="bg-black/30 text-white p-2 rounded-full hover:bg-black/50">
+            ‹
+          </button>
+        </div>
+        <div className="absolute inset-y-0 right-2 flex items-center">
+          <button onClick={next} className="bg-black/30 text-white p-2 rounded-full hover:bg-black/50">
+            ›
+          </button>
+        </div>
+        <div className="absolute top-4 right-4 bg-[#c9a961] text-white px-4 py-2 rounded-lg flex flex-col items-end">
+          <p className="text-sm">From</p>
+          <p className="text-xl font-semibold">{room.price}</p>
+          <p className="text-xs">per night</p>
+        </div>
+      </div>
+    );
+  }
 
   const scrollToContact = () => {
     const element = document.getElementById('contact');
@@ -103,18 +152,7 @@ export default function Rooms() {
               className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
             >
               {/* Image */}
-              <div className="relative h-64 overflow-hidden">
-                <img
-                  src={room.images[0]}
-                  alt={room.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute top-4 right-4 bg-[#c9a961] text-white px-4 py-2 rounded-lg flex flex-col items-end">
-                  <p className="text-sm">From</p>
-                  <p className="text-xl font-semibold">{room.price}</p>
-                  <p className="text-xs">per night</p>
-                </div>
-              </div>
+              <RoomCard room={room} />
 
               {/* Content */}
               <div className="p-6">
