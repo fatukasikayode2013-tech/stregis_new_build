@@ -1,4 +1,5 @@
 import React from 'react';
+import Navbar from '../components/Navbar';
 
 export const metadata = {
   title: 'Special Offer - St. Regis',
@@ -7,7 +8,9 @@ export const metadata = {
 
 export default function OfferPage() {
   return (
-    <section className="py-20 lg:py-28 bg-white">
+    <>
+      <Navbar />
+      <section className="py-20 lg:py-28 bg-white">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center mb-12">
           <p className="text-[#c9a961] tracking-widest mb-2">SPECIAL</p>
