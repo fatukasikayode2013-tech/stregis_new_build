@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image';
 import { Facebook, Instagram, Twitter, Mail, Phone, MapPin, Youtube, Linkedin } from 'lucide-react';
 
 export default function Footer() {
@@ -17,7 +18,7 @@ export default function Footer() {
           {/* Logo & Description */}
           <div>
             <div className="mb-4 flex items-center gap-3">
-              <img src="/logo.png" alt="St Regis Logo" className="h-12 w-auto" />
+              <Image src="/logo.png" alt="St Regis Logo" width={120} height={48} className="h-12 w-auto" />
               <div>
                 <h3 className="text-3xl font-serif" style={{ fontFamily: 'Playfair Display, serif' }}>
                   St. Regis

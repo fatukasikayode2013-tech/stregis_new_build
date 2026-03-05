@@ -25,10 +25,19 @@ export async function POST(request: Request) {
       return NextResponse.json({ ok: false, error: 'Guest email is required for verification' }, { status: 400 });
     }
 
-    // create token and save reservation for later verification
-    const token = randomUUID();
-    await saveReservation(token, { name, email, phone, checkin, checkout, roomType, message });
+    // build verification link carrying reservation info as query params
+    const token = randomUUID(); // kept for appearance but not required
+    const params = new URLSearchParams({
+      name: name || '',
+      email: email || '',
+      phone: phone || '',
+      checkin: checkin || '',
+      checkout: checkout || '',
+      roomType: roomType || '',
+      token,
+    });
 
+    // do not persist reservation; serverless runtime resets on every invocation
     const host = process.env.SMTP_HOST || process.env.ZOHO_HOST || 'smtp.zoho.com';
     const port = parseInt(process.env.SMTP_PORT || process.env.ZOHO_PORT || '587', 10);
     const secure = (process.env.SMTP_SECURE || process.env.ZOHO_SECURE === 'true') || port === 465;
@@ -40,7 +49,7 @@ export async function POST(request: Request) {
       auth: { user, pass },
     });
 
-    const verifyUrl = `${siteUrl.replace(/\/$/, '')}/api/verify/${token}`;
+    const verifyUrl = `${siteUrl.replace(/\/$/, '')}/api/verify/${token}?${params.toString()}`;
 
     const mailBody = `
       <p>Hi ${name || 'Guest'},</p>
@@ -56,9 +65,15 @@ export async function POST(request: Request) {
       html: mailBody,
     });
 
+    console.log(`✓ Verification email sent to ${email}`);
     return NextResponse.json({ ok: true, message: 'verification_sent' });
   } catch (err: any) {
-    console.error('send-reservation error', err);
+    console.error('✗ send-reservation error:', err);
+    console.error('SMTP Config Check:', {
+      user: process.env.SMTP_USER || process.env.ZOHO_USER ? '***' : 'NOT SET',
+      hasPassword: !!(process.env.SMTP_PASS || process.env.ZOHO_PASS),
+      host: process.env.SMTP_HOST || process.env.ZOHO_HOST || 'smtp.zoho.com',
+    });
     return NextResponse.json({ ok: false, error: err.message || String(err) }, { status: 500 });
   }
 }

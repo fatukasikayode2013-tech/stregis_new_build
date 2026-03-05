@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 export function Gallery() {
   const images = [
     {
@@ -56,10 +58,11 @@ export function Gallery() {
               key={index}
               className={`${image.span} group relative overflow-hidden rounded-2xl cursor-pointer`}
             >
-              <img
+              <Image
                 src={image.url}
                 alt={image.title}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                fill
+                className="object-cover group-hover:scale-110 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                 <h3 className="text-white text-xl font-semibold">{image.title}</h3>

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Users, Maximize } from 'lucide-react';
 
 export function Rooms() {
@@ -69,10 +70,11 @@ export function Rooms() {
             >
               {/* Image */}
               <div className="relative h-64 overflow-hidden">
-                <img
+                <Image
                   src={room.image}
                   alt={room.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute top-4 right-4 bg-[#c9a961] text-white px-4 py-2 rounded-lg">
                   <p className="text-sm">From</p>

@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
@@ -22,10 +23,11 @@ export default function OfferPage() {
 
         <div className="grid lg:grid-cols-2 gap-8 items-center">
           <div className="relative w-full aspect-[4/3]">
-            <img
+            <Image
               src="/images/offer.jpeg"
               alt="Special Offer"
-              className="absolute inset-0 w-full h-full object-cover rounded-2xl shadow-lg"
+              fill
+              className="object-cover rounded-2xl shadow-lg"
             />
             <span className="absolute top-3 right-3 bg-[#c9a961] text-white px-3 py-1 rounded-full text-sm font-semibold">Active</span>
           </div>

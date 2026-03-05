@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Menu, X, Phone } from 'lucide-react';
 
 export default function Navbar() {
@@ -34,7 +35,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a href="/" className="cursor-pointer flex items-center gap-2" onClick={() => scrollToSection('hero')}>
-            <img src="/logo.png" alt="St Regis Logo" className="h-8 w-auto" />
+            <Image src="/logo.png" alt="St Regis Logo" width={120} height={32} className="h-8 w-auto" />
             <div>
               <h1 className="text-2xl lg:text-3xl font-serif text-[#1e3a5f]" style={{ fontFamily: 'Playfair Display, serif' }}>
                 St. Regis

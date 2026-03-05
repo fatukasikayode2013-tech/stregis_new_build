@@ -4,18 +4,39 @@ import { getReservation, deleteReservation } from '../../../../app/lib/reservati
 import { getRoomDetails } from '../../../../app/lib/roomData';
 
 const INFO_EMAIL = 'info@stregishotelandresort.com';
+const RESERVATIONS_EMAIL = 'reservations@stregishotelandresort.com';
 
 export async function GET(request: Request, { params }: { params: { token: string } }) {
   try {
     const token = params.token;
-    if (!token) return NextResponse.json({ ok: false, error: 'Missing token' }, { status: 400 });
+    const query = new URL(request.url).searchParams;
 
+    // try reading stored reservation (may not exist in serverless env)
     const entry = getReservation(token);
-    if (!entry) return NextResponse.json({ error: 'Invalid or expired verification link.' }, { status: 410 });
+
+    // if store empty, fall back to query parameters provided in link
+    const data = entry || {
+      name: query.get('name') || undefined,
+      email: query.get('email') || undefined,
+      phone: query.get('phone') || undefined,
+      checkin: query.get('checkin') || undefined,
+      checkout: query.get('checkout') || undefined,
+      roomType: query.get('roomType') || undefined,
+      message: undefined,
+    };
+
+    if (!entry && !query.has('email')) {
+      return NextResponse.json({ error: 'Invalid or expired verification link.' }, { status: 410 });
+    }
 
     const user = process.env.ZOHO_USER;
     const pass = process.env.ZOHO_PASS;
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || `http://localhost:3000`;
+    
+    // Determine the site URL - always use request host for redirects to handle domain aliases properly
+    const requestUrl = new URL(request.url);
+    const currentHost = requestUrl.host;
+    const currentProtocol = requestUrl.protocol;
+    const siteUrl = `${currentProtocol}//${currentHost}`;
 
     if (!user || !pass) {
       return NextResponse.json({ error: 'Server misconfiguration: SMTP not set.' }, { status: 500 });
@@ -33,10 +54,10 @@ export async function GET(request: Request, { params }: { params: { token: strin
     });
 
     // send email to hotel
-    const hotelRoomDetails = getRoomDetails(entry.roomType || '');
+    const hotelRoomDetails = getRoomDetails(data.roomType || '');
     
-    const specialRequestsRow = entry.message 
-      ? `<div class="detail-row"><span class="detail-label">Special Requests:</span><span class="detail-value">${entry.message}</span></div>`
+    const specialRequestsRow = data.message 
+      ? `<div class="detail-row"><span class="detail-label">Special Requests:</span><span class="detail-value">${data.message}</span></div>`
       : '';
     
     const roomInfoSection = hotelRoomDetails 
@@ -94,15 +115,15 @@ export async function GET(request: Request, { params }: { params: { token: strin
             <div class="guest-info-box">
               <div class="detail-row">
                 <span class="detail-label">Name:</span>
-                <span class="detail-value">${entry.name || '—'}</span>
+                <span class="detail-value">${data.name || '—'}</span>
               </div>
               <div class="detail-row">
                 <span class="detail-label">Email:</span>
-                <span class="detail-value"><a href="mailto:${entry.email}" class="contact-link">${entry.email || '—'}</a></span>
+                <span class="detail-value"><a href="mailto:${data.email}" class="contact-link">${data.email || '—'}</a></span>
               </div>
               <div class="detail-row">
                 <span class="detail-label">Phone:</span>
-                <span class="detail-value"><a href="tel:${entry.phone}" class="contact-link">${entry.phone || '—'}</a></span>
+                <span class="detail-value"><a href="tel:${data.phone}" class="contact-link">${data.phone || '—'}</a></span>
               </div>
             </div>
 
@@ -110,15 +131,15 @@ export async function GET(request: Request, { params }: { params: { token: strin
             <div class="reservation-box">
               <div class="detail-row">
                 <span class="detail-label">Check-in Date:</span>
-                <span class="detail-value"><strong>${entry.checkin || '—'}</strong></span>
+                <span class="detail-value"><strong>${data.checkin || '—'}</strong></span>
               </div>
               <div class="detail-row">
                 <span class="detail-label">Check-out Date:</span>
-                <span class="detail-value"><strong>${entry.checkout || '—'}</strong></span>
+                <span class="detail-value"><strong>${data.checkout || '—'}</strong></span>
               </div>
               <div class="detail-row">
                 <span class="detail-label">Room Type Requested:</span>
-                <span class="detail-value"><strong>${entry.roomType || '—'}</strong></span>
+                <span class="detail-value"><strong>${data.roomType || '—'}</strong></span>
               </div>
               ${specialRequestsRow}
             </div>
@@ -129,7 +150,7 @@ export async function GET(request: Request, { params }: { params: { token: strin
             <div class="action-box">
               <div class="action-title">✓ Required Actions:</div>
               <ul class="action-list">
-                <li>Check availability for ${entry.roomType || 'requested room'} on ${entry.checkin} - ${entry.checkout}</li>
+                <li>Check availability for ${data.roomType || 'requested room'} on ${data.checkin} - ${data.checkout}</li>
                 <li>If available: Send guest booking confirmation email with account details, payment terms, and check-in instructions</li>
                 <li>If NOT available: Contact guest immediately to offer alternative room options or dates</li>
                 <li>Process payment/deposit if required by hotel policy</li>
@@ -138,8 +159,8 @@ export async function GET(request: Request, { params }: { params: { token: strin
 
             <h3>Guest Contact</h3>
             <p>
-              📧 <a href="mailto:${entry.email}" class="contact-link">${entry.email}</a><br/>
-              📱 <a href="tel:${entry.phone}" class="contact-link">${entry.phone || 'Not provided'}</a>
+              📧 <a href="mailto:${data.email}" class="contact-link">${data.email}</a><br/>
+              📱 <a href="tel:${data.phone}" class="contact-link">${data.phone || 'Not provided'}</a>
             </p>
 
             <p style="margin-top: 30px; padding: 15px; background-color: #f9f9f9; border-radius: 5px; font-size: 13px;">
@@ -155,16 +176,28 @@ export async function GET(request: Request, { params }: { params: { token: strin
       </html>
     `;
 
-    await transporter.sendMail({
+    // Send email to hotel (non-blocking)
+    transporter.sendMail({
       from: user,
-      to: INFO_EMAIL,
-      subject: `[NEW VERIFIED RESERVATION] ${entry.name || 'Guest'} - ${entry.roomType || 'Room'} on ${entry.checkin}`,
+      to: `${RESERVATIONS_EMAIL}, ${INFO_EMAIL}`,
+      cc: undefined,
+      subject: `[NEW VERIFIED RESERVATION] ${data.name || 'Guest'} - ${data.roomType || 'Room'} on ${data.checkin}`, 
       html: hotelBody,
-      replyTo: entry.email || undefined,
+      replyTo: data.email || undefined,
+    }).then(() => {
+      console.log(`✓ Reservation notification sent to ${RESERVATIONS_EMAIL} and ${INFO_EMAIL}`);
+    }).catch((err) => {
+      console.error(`✗ Failed to send reservation email to hotel:`, err.message);
+      console.error('SMTP Config:', { 
+        host: process.env.ZOHO_HOST, 
+        port: process.env.ZOHO_PORT,
+        user: process.env.ZOHO_USER ? '***' : 'NOT SET',
+        recipientEmails: `${RESERVATIONS_EMAIL}, ${INFO_EMAIL}`
+      });
     });
 
     // send confirmation to guest
-    const roomDetails = getRoomDetails(entry.roomType || '');
+    const roomDetails = getRoomDetails(data.roomType || '');
     const amenitiesList = roomDetails 
       ? roomDetails.amenities.map(a => `<li style="margin-bottom: 8px;">${a}</li>`).join('')
       : '';
@@ -172,8 +205,8 @@ export async function GET(request: Request, { params }: { params: { token: strin
       ? roomDetails.highlights.map(h => `<li style="margin-bottom: 8px;">${h}</li>`).join('')
       : '';
 
-    const specialRequestsHTML = entry.message 
-      ? `<div class="detail-row"><span class="detail-label">Special Requests:</span> ${entry.message}</div>`
+    const specialRequestsHTML = data.message 
+      ? `<div class="detail-row"><span class="detail-label">Special Requests:</span> ${data.message}</div>`
       : '';
 
     const roomDetailsHTML = roomDetails 
@@ -240,7 +273,7 @@ export async function GET(request: Request, { params }: { params: { token: strin
             <h1>✓ Reservation Verified</h1>
           </div>
           <div class="content">
-            <p>Dear ${entry.name || 'Valued Guest'},</p>
+            <p>Dear ${data.name || 'Valued Guest'},</p>
             <div class="confirmation-box">
               <p><strong>Thank you for requesting a reservation at St. Regis Hotel & Resort.</strong></p>
               <p>Your email has been verified and we have received your reservation request. Our reservations team is now reviewing your booking and will contact you shortly to confirm availability and finalize the details.</p>
@@ -249,22 +282,22 @@ export async function GET(request: Request, { params }: { params: { token: strin
             <h3>Your Reservation Details</h3>
             <div class="details-box">
               <div class="detail-row">
-                <span class="detail-label">Name:</span> ${entry.name || '—'}
+                <span class="detail-label">Name:</span> ${data.name || '—'}
               </div>
               <div class="detail-row">
-                <span class="detail-label">Email:</span> ${entry.email || '—'}
+                <span class="detail-label">Email:</span> ${data.email || '—'}
               </div>
               <div class="detail-row">
-                <span class="detail-label">Phone:</span> ${entry.phone || '—'}
+                <span class="detail-label">Phone:</span> ${data.phone || '—'}
               </div>
               <div class="detail-row">
-                <span class="detail-label">Check-in:</span> ${entry.checkin || '—'}
+                <span class="detail-label">Check-in:</span> ${data.checkin || '—'}
               </div>
               <div class="detail-row">
-                <span class="detail-label">Check-out:</span> ${entry.checkout || '—'}
+                <span class="detail-label">Check-out:</span> ${data.checkout || '—'}
               </div>
               <div class="detail-row">
-                <span class="detail-label">Room Type:</span> <strong>${entry.roomType || '—'}</strong>
+                <span class="detail-label">Room Type:</span> <strong>${data.roomType || '—'}</strong>
               </div>
               ${specialRequestsHTML}
             </div>
@@ -295,27 +328,29 @@ export async function GET(request: Request, { params }: { params: { token: strin
       </html>
     `;
 
-    if (entry.email) {
-      await transporter.sendMail({
+    if (data.email) {
+      transporter.sendMail({
         from: user,
-        to: entry.email,
+        to: data.email,
         subject: 'Reservation verified — St. Regis',
         html: guestBody,
+      }).catch((err) => {
+        console.error('Failed to send guest confirmation email:', err.message);
       });
     }
 
     await deleteReservation(token);
 
     // Redirect to confirmation page with guest details
-    const params = new URLSearchParams({
-      name: entry.name || '',
-      email: entry.email || '',
-      phone: entry.phone || '',
-      checkin: entry.checkin || '',
-      checkout: entry.checkout || '',
-      roomType: entry.roomType || '',
+    const redirectParams = new URLSearchParams({
+      name: data.name || '',
+      email: data.email || '',
+      phone: data.phone || '',
+      checkin: data.checkin || '',
+      checkout: data.checkout || '',
+      roomType: data.roomType || '',
     });
-    return NextResponse.redirect(new URL(`/confirmation?${params.toString()}`, siteUrl), { status: 302 });
+    return NextResponse.redirect(new URL(`/confirmation?${redirectParams.toString()}`, siteUrl), { status: 302 });
   } catch (err: any) {
     console.error('verify error', err);
     return NextResponse.json({ error: 'Server error' }, { status: 500 });

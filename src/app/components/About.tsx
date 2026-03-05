@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { MapPin, Users, Award, Briefcase } from 'lucide-react';
 
 export function About() {
@@ -30,11 +31,14 @@ export function About() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Image */}
           <div className="order-2 lg:order-1">
-            <img
-              src="/pics/IMG-20260214-WA0260.jpg.jpeg"
-              alt="Hotel Lobby"
-              className="w-full h-[500px] object-cover rounded-2xl shadow-xl"
-            />
+            <div className="relative w-full h-[500px]">
+              <Image
+                src="/pics/IMG-20260214-WA0260.jpg.jpeg"
+                alt="Hotel Lobby"
+                fill
+                className="object-cover rounded-2xl shadow-xl"
+              />
+            </div>
           </div>
 
           {/* Content */}

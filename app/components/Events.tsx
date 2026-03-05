@@ -1,23 +1,29 @@
 'use client'
 
-import { Calendar, PartyPopper, Briefcase } from 'lucide-react';
+import React from 'react';
+import { Heart, PartyPopper, Music, GlassWater, ChevronRight, Sparkles } from 'lucide-react';
 
 export default function Events() {
-  const eventTypes = [
+  const eventHighlights = [
     {
-      icon: Briefcase,
-      title: 'Corporate Meetings',
-      description: 'Professional conference rooms equipped with modern technology',
+      icon: Heart,
+      title: 'Grand Weddings',
+      description: 'Exchange vows in an atmosphere of timeless romance and gold-leaf elegance.',
     },
     {
       icon: PartyPopper,
-      title: 'Weddings & Celebrations',
-      description: 'Elegant banquet halls perfect for your special day',
+      title: 'Social Galas',
+      description: 'From milestone birthdays to elite social gatherings in our starlit ballrooms.',
     },
     {
-      icon: Calendar,
-      title: 'Conferences & Seminars',
-      description: 'Spacious venues for large-scale events and gatherings',
+      icon: Music,
+      title: 'Private Concerts',
+      description: 'Acoustically tuned spaces for intimate performances and sophisticated soirées.',
+    },
+    {
+      icon: GlassWater,
+      title: 'Exquisite Dining',
+      description: 'Bespoke banquet menus crafted by world-class chefs for your private guests.',
     },
   ];
 
@@ -29,58 +35,100 @@ export default function Events() {
   };
 
   return (
-    <section id="events" className="py-20 lg:py-28 bg-[#f5f3ee]">
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Content */}
-          <div>
-            <p className="text-[#c9a961] tracking-widest mb-4">EVENTS & CONFERENCING</p>
+    <section id="events" className="py-24 lg:py-36 bg-[#fdfdfc] relative overflow-hidden">
+      {/* Subtle Decorative Elements for a White Theme */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#c9a961] opacity-[0.05] rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2"></div>
+      
+      <div className="container mx-auto px-4 lg:px-12 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+          
+          {/* Content Side - Stays Left on Desktop */}
+          <div className="order-2 lg:order-1">
+            <div className="flex items-center gap-3 mb-6">
+              <Sparkles className="w-5 h-5 text-[#c9a961]" />
+              <p className="text-[#c9a961] font-semibold tracking-[0.4em] text-xs uppercase">
+                Grand Occasions
+              </p>
+            </div>
+
             <h2
-              className="text-4xl lg:text-5xl text-[#1e3a5f] mb-6"
+              className="text-4xl lg:text-6xl text-[#1e3a5f] mb-8 leading-[1.1]"
               style={{ fontFamily: 'Playfair Display, serif' }}
             >
-              Perfect Venue for Every Occasion
+              Celebrate Life's <br />
+              <span className="italic text-[#c9a961]">Finest Moments</span>
             </h2>
-            <p className="text-gray-700 mb-8 leading-relaxed text-lg">
-              Host your next event at St. Regis Hotel & Resort. Our versatile event spaces, professional staff, and comprehensive amenities ensure your gathering is memorable and successful.
+
+            <p className="text-gray-600 mb-12 leading-relaxed text-lg max-w-xl font-light">
+              At St. Regis, we don't just host events; we curate legacies. From grand weddings to intimate private celebrations, our versatile spaces transform to meet your every desire in an atmosphere of pure luxury.
             </p>
 
-            <div className="space-y-6 mb-8">
-              {eventTypes.map((event, index) => (
-                <div key={index} className="flex gap-4">
-                  <div className="flex-shrink-0">
-                    <div className="w-14 h-14 bg-[#c9a961] rounded-xl flex items-center justify-center">
-                      <event.icon className="w-7 h-7 text-white" />
+            {/* Event Types Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10 mb-12">
+              {eventHighlights.map((item, index) => (
+                <div key={index} className="group cursor-default">
+                  <div className="flex items-center gap-4 mb-3">
+                    <div className="w-10 h-10 rounded-full bg-[#f5f3ee] border border-[#c9a961]/20 flex items-center justify-center group-hover:bg-[#1e3a5f] transition-all duration-500">
+                      <item.icon className="w-5 h-5 text-[#c9a961] group-hover:text-white transition-colors" />
                     </div>
+                    <h3 className="text-[#1e3a5f] font-semibold text-lg group-hover:text-[#c9a961] transition-colors">
+                      {item.title}
+                    </h3>
                   </div>
-                  <div>
-                    <h3 className="text-xl text-[#1e3a5f] mb-2">{event.title}</h3>
-                    <p className="text-gray-600">{event.description}</p>
-                  </div>
+                  <p className="text-gray-500 text-sm leading-relaxed pl-14">
+                    {item.description}
+                  </p>
                 </div>
               ))}
             </div>
 
             <button
               onClick={scrollToContact}
-              className="bg-[#c9a961] text-white px-8 py-4 rounded-lg hover:bg-[#b89851] transition-all hover:shadow-lg text-lg"
+              className="group relative inline-flex items-center gap-3 bg-[#1e3a5f] text-white px-10 py-5 rounded-full font-bold overflow-hidden transition-all hover:shadow-2xl hover:-translate-y-1"
             >
-              Inquire About Events
+              <span className="relative z-10">Reserve Your Date</span>
+              <ChevronRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
+              <div className="absolute inset-0 bg-[#c9a961] opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </button>
           </div>
 
-          {/* Image */}
-          <div className="relative">
-            <img
-              src="https://images.unsplash.com/photo-1505845753232-f74a87b62db6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxob3RlbCUyMGNvbmZlcmVuY2UlMjByb29tJTIwbWVldGluZ3xlbnwxfHx8fDE3NzI1MDk4NDV8MA&ixlib=rb-4.1.0&q=80&w=1080"
-              alt="Conference Room"
-              className="w-full h-[500px] object-cover rounded-2xl shadow-xl"
-            />
-            <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-lg hidden lg:block">
-              <p className="text-4xl font-bold text-[#c9a961]" style={{ fontFamily: 'Playfair Display, serif' }}>500+</p>
-              <p className="text-gray-600">Events Hosted</p>
+          {/* Visual Side - Stays Right on Desktop */}
+          <div className="order-1 lg:order-2 relative">
+            {/* Elegant Border Frame */}
+            <div className="absolute -inset-4 border border-[#c9a961]/20 rounded-[2rem] hidden lg:block"></div>
+            
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/5] bg-black">
+              <video
+                src="/video/events.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover"
+              />
+              
+              {/* Premium Floating Card (White Theme) */}
+              <div className="absolute bottom-6 left-6 right-6 backdrop-blur-md bg-white/90 border border-white p-8 rounded-2xl shadow-xl">
+                <div className="flex items-center justify-between mb-4">
+                  <p className="text-[#c9a961] text-xs font-bold tracking-widest uppercase">Venue Capacity</p>
+                  <div className="flex gap-1">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#c9a961]"></div>
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#c9a961]/40"></div>
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#c9a961]/20"></div>
+                  </div>
+                </div>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-4xl font-bold text-[#1e3a5f]" style={{ fontFamily: 'Playfair Display, serif' }}>1,000+</span>
+                  <span className="text-gray-500 text-sm font-medium uppercase tracking-tighter">Honored Guests</span>
+                </div>
+                <div className="mt-4 pt-4 border-t border-gray-100 flex justify-between">
+                  <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Bespoke Decor</span>
+                  <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">VIP Entrance</span>
+                </div>
+              </div>
             </div>
           </div>
+
         </div>
       </div>
     </section>

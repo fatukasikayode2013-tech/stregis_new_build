@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Calendar, PartyPopper, Briefcase } from 'lucide-react';
 
 export function Events() {
@@ -69,10 +70,11 @@ export function Events() {
 
           {/* Image */}
           <div className="relative">
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1505845753232-f74a87b62db6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxob3RlbCUyMGNvbmZlcmVuY2UlMjByb29tJTIwbWVldGluZ3xlbnwxfHx8fDE3NzI1MDk4NDV8MA&ixlib=rb-4.1.0&q=80&w=1080"
               alt="Conference Room"
-              className="w-full h-[500px] object-cover rounded-2xl shadow-xl"
+              fill
+              className="object-cover rounded-2xl shadow-xl"
             />
             <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-lg hidden lg:block">
               <p className="text-4xl font-bold text-[#c9a961]" style={{ fontFamily: 'Playfair Display, serif' }}>500+</p>
