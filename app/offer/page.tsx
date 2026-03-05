@@ -1,14 +1,24 @@
-import React from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
-export const metadata = {
-  title: 'Special Offer - St. Regis',
-  description: 'Exclusive offers and promotions at St. Regis Hotel & Resort',
-};
-
 export default function OfferPage() {
+  const [currentImage, setCurrentImage] = useState(0);
+  const images = ['/images/offer.jpeg', '/images/offer_a.jpeg'];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % images.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [images.length]);
+
+  const nextImage = () => setCurrentImage((prev) => (prev + 1) % images.length);
+  const prevImage = () => setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
+
   return (
     <>
       <Navbar />
@@ -22,14 +32,41 @@ export default function OfferPage() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8 items-center">
-          <div className="relative w-full aspect-[4/3]">
+          <div className="relative w-full aspect-[4/3] group">
             <Image
-              src="/images/offer.jpeg"
+              src={images[currentImage]}
               alt="Special Offer"
               fill
-              className="object-cover rounded-2xl shadow-lg"
+              className="object-cover rounded-2xl shadow-lg transition-opacity duration-500"
             />
             <span className="absolute top-3 right-3 bg-[#c9a961] text-white px-3 py-1 rounded-full text-sm font-semibold">Active</span>
+            
+            {/* Navigation buttons */}
+            <button 
+              onClick={prevImage}
+              className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/30 text-white p-2 rounded-full hover:bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity"
+            >
+              ‹
+            </button>
+            <button 
+              onClick={nextImage}
+              className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/30 text-white p-2 rounded-full hover:bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity"
+            >
+              ›
+            </button>
+            
+            {/* Indicators */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+              {images.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentImage(index)}
+                  className={`w-2 h-2 rounded-full transition-all ${
+                    index === currentImage ? 'bg-[#c9a961] w-6' : 'bg-white/50'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
 
           <div>
