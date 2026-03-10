@@ -180,20 +180,20 @@ export async function GET(request: Request, { params }: { params: { token: strin
     try {
       await transporter.sendMail({
         from: user,
-        to: `${RESERVATIONS_EMAIL}, ${INFO_EMAIL}`,
+        to: INFO_EMAIL,
         cc: undefined,
         subject: `[NEW VERIFIED RESERVATION] ${data.name || 'Guest'} - ${data.roomType || 'Room'} on ${data.checkin}`, 
         html: hotelBody,
         replyTo: data.email || undefined,
       });
-      console.log(`✓ Reservation notification sent to ${RESERVATIONS_EMAIL} and ${INFO_EMAIL}`);
+      console.log(`✓ Reservation notification sent to ${INFO_EMAIL}`);
     } catch (err: any) {
       console.error(`✗ Failed to send reservation email to hotel:`, err.message);
       console.error('SMTP Config:', { 
         host: process.env.ZOHO_HOST, 
         port: process.env.ZOHO_PORT,
         user: process.env.ZOHO_USER ? '***' : 'NOT SET',
-        recipientEmails: `${RESERVATIONS_EMAIL}, ${INFO_EMAIL}`
+        recipientEmails: `${INFO_EMAIL}`
       });
     }
 
