@@ -147,7 +147,6 @@ export default function ConfirmationPage() {
                 <div className="relative h-[300px] w-full overflow-hidden rounded-[2rem]">
                   <video
                     src="/videos/pool.mp4"
-                    alt="Pool"
                     className="w-full h-full object-cover"
                     autoPlay
                     muted
