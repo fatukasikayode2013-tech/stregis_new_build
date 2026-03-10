@@ -145,10 +145,14 @@ export default function ConfirmationPage() {
               {/* Next Steps Section */}
               <div className="grid md:grid-cols-2 gap-8 items-center bg-[#f5f3ee] rounded-[2.5rem] p-4">
                 <div className="relative h-[300px] w-full overflow-hidden rounded-[2rem]">
-                  <img
-                    src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80"
-                    alt="Hotel Lobby"
+                  <video
+                    src="/videos/pool.mp4"
+                    alt="Pool"
                     className="w-full h-full object-cover"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
                   />
                 </div>
                 <div className="p-8 lg:p-12">

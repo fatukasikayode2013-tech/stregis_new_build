@@ -176,17 +176,18 @@ export async function GET(request: Request, { params }: { params: { token: strin
       </html>
     `;
 
-    // Send email to hotel (non-blocking)
-    transporter.sendMail({
-      from: user,
-      to: `${RESERVATIONS_EMAIL}, ${INFO_EMAIL}`,
-      cc: undefined,
-      subject: `[NEW VERIFIED RESERVATION] ${data.name || 'Guest'} - ${data.roomType || 'Room'} on ${data.checkin}`, 
-      html: hotelBody,
-      replyTo: data.email || undefined,
-    }).then(() => {
+    // Send email to hotel (blocking - must complete before response)
+    try {
+      await transporter.sendMail({
+        from: user,
+        to: `${RESERVATIONS_EMAIL}, ${INFO_EMAIL}`,
+        cc: undefined,
+        subject: `[NEW VERIFIED RESERVATION] ${data.name || 'Guest'} - ${data.roomType || 'Room'} on ${data.checkin}`, 
+        html: hotelBody,
+        replyTo: data.email || undefined,
+      });
       console.log(`✓ Reservation notification sent to ${RESERVATIONS_EMAIL} and ${INFO_EMAIL}`);
-    }).catch((err) => {
+    } catch (err: any) {
       console.error(`✗ Failed to send reservation email to hotel:`, err.message);
       console.error('SMTP Config:', { 
         host: process.env.ZOHO_HOST, 
@@ -194,7 +195,7 @@ export async function GET(request: Request, { params }: { params: { token: strin
         user: process.env.ZOHO_USER ? '***' : 'NOT SET',
         recipientEmails: `${RESERVATIONS_EMAIL}, ${INFO_EMAIL}`
       });
-    });
+    }
 
     // send confirmation to guest
     const roomDetails = getRoomDetails(data.roomType || '');
@@ -329,14 +330,17 @@ export async function GET(request: Request, { params }: { params: { token: strin
     `;
 
     if (data.email) {
-      transporter.sendMail({
-        from: user,
-        to: data.email,
-        subject: 'Reservation verified — St. Regis',
-        html: guestBody,
-      }).catch((err) => {
+      try {
+        await transporter.sendMail({
+          from: user,
+          to: data.email,
+          subject: 'Reservation verified — St. Regis',
+          html: guestBody,
+        });
+        console.log(`✓ Guest confirmation email sent to ${data.email}`);
+      } catch (err: any) {
         console.error('Failed to send guest confirmation email:', err.message);
-      });
+      }
     }
 
     await deleteReservation(token);

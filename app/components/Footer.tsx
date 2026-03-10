@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image';
-import { Facebook, Instagram, Twitter, Mail, Phone, MapPin, Youtube, Linkedin } from 'lucide-react';
+import { Facebook, Instagram, Twitter, Mail, Phone, MapPin, Youtube, Linkedin, Globe } from 'lucide-react';
 
 export default function Footer() {
   const scrollToSection = (id: string) => {
@@ -29,20 +29,22 @@ export default function Footer() {
             <p className="text-gray-400 mb-6">
               Experience unparalleled luxury and sophistication at St Regis Hotel and Resort. Your destination for world-class hospitality.
             </p>
-            <div className="flex gap-4">
+            <div className="flex flex-wrap gap-4">
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/profile.php?id=61578125221131"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#c9a961] transition-colors"
+                title="Facebook"
               >
                 <Facebook className="w-5 h-5" />
               </a>
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/stregisnaomisgarden/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#c9a961] transition-colors"
+                title="Instagram"
               >
                 <Instagram className="w-5 h-5" />
               </a>
@@ -51,24 +53,63 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#c9a961] transition-colors"
+                title="Twitter/X"
               >
                 <Twitter className="w-5 h-5" />
               </a>
               <a
-                href="https://www.youtube.com/@st.regishotelsbenincity4482"
+                href="https://youtu.be/lHo9gUsAz2Q"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#c9a961] transition-colors"
+                title="YouTube"
               >
                 <Youtube className="w-5 h-5" />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/st-regis-hotel-and-resorts-632801195/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#c9a961] transition-colors"
+                title="LinkedIn"
               >
                 <Linkedin className="w-5 h-5" />
+              </a>
+              <a
+                href="https://www.threads.com/@stregisnaomisgarden"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#c9a961] transition-colors text-xs font-bold"
+                title="Threads"
+              >
+                @
+              </a>
+              <a
+                href="https://www.tiktok.com/@st.regis.hotels.r"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#c9a961] transition-colors font-bold"
+                title="TikTok"
+              >
+                TK
+              </a>
+              <a
+                href="https://www.pinterest.com/stregishotelsandresorts/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#c9a961] transition-colors text-xs font-bold"
+                title="Pinterest"
+              >
+                P
+              </a>
+              <a
+                href="https://stregishotelandresort.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#c9a961] transition-colors"
+                title="Website"
+              >
+                <Globe className="w-5 h-5" />
               </a>
             </div>
           </div>
