@@ -1,135 +1,186 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
+import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
-import { Menu, X, Phone } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+
+const navLinks = [
+  { href: '#hero', label: 'Home' },
+  { href: '#about', label: 'About' },
+  { href: '#rooms', label: 'Rooms' },
+  { href: '#amenities', label: 'Amenities' },
+  { href: '#gallery', label: 'Gallery' },
+  { href: '#events', label: 'Events' },
+  { href: '#contact', label: 'Contact' },
+];
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('hero');
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
+  const scrollToSection = useCallback((href: string) => {
+    const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
       setIsMobileMenuOpen(false);
     }
-  };
+  }, []);
+
+  // Handle scroll effects
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+
+      // Update active section
+      const sections = navLinks.map((link) => link.href.substring(1));
+      let current = '';
+      
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= 150 && rect.bottom >= 150) {
+            current = section;
+            break;
+          }
+        }
+      }
+      
+      if (current) {
+        setActiveSection(current);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-md py-3' : 'bg-white/95 backdrop-blur-md py-4'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled
+          ? 'bg-white/95 backdrop-blur-md shadow-lg py-3'
+          : 'bg-gradient-to-b from-black/60 to-transparent py-6'
       }`}
     >
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <a href="/" className="cursor-pointer flex items-center gap-2" onClick={() => scrollToSection('hero')}>
-            <Image src="/logo.png" alt="St Regis Logo" width={120} height={32} className="h-8 w-auto" />
-            <div>
-              <h1 className="text-2xl lg:text-3xl font-serif text-[#1e3a5f]" style={{ fontFamily: 'Playfair Display, serif' }}>
-                St. Regis
-              </h1>
-              <p className="text-xs text-[#c9a961] tracking-widest">HOTEL & RESORT</p>
-            </div>
-          </a>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
-            <button onClick={() => scrollToSection('about')} className="text-[#1e3a5f] hover:text-[#c9a961] transition-colors">
-              About
-            </button>
-            <button onClick={() => scrollToSection('rooms')} className="text-[#1e3a5f] hover:text-[#c9a961] transition-colors">
-              Rooms
-            </button>
-            <button onClick={() => scrollToSection('amenities')} className="text-[#1e3a5f] hover:text-[#c9a961] transition-colors">
-              Amenities
-            </button>
-            <button onClick={() => scrollToSection('gallery')} className="text-[#1e3a5f] hover:text-[#c9a961] transition-colors">
-              Gallery
-            </button>
-            <button onClick={() => scrollToSection('events')} className="text-[#1e3a5f] hover:text-[#c9a961] transition-colors">
-              Events
-            </button>
-            <Link href="/offer" className="text-[#1e3a5f] hover:text-[#c9a961] transition-colors">
-              Offers
-            </Link>
-            <button onClick={() => scrollToSection('contact')} className="text-[#1e3a5f] hover:text-[#c9a961] transition-colors">
-              Contact
-            </button>
-          </nav>
-
-          {/* Phone Number & Book Button */}
-          <div className="hidden lg:flex items-center gap-4">
-            <a href="tel:09060001732" className="flex items-center gap-2 text-[#1e3a5f]">
-              <Phone className="w-4 h-4" />
-              <span>0906 000 1732</span>
-            </a>
-            <button
-              onClick={() => window.location.href = '/#contact'}
-              className="bg-[#c9a961] text-white px-6 py-2.5 rounded-lg hover:bg-[#b89851] transition-all hover:shadow-lg"
-            >
-              Book Now
-            </button>
+      <nav className="container mx-auto px-6 flex items-center justify-between">
+        {/* Logo */}
+        <button
+          onClick={() => scrollToSection('#hero')}
+          className="flex items-center gap-3 group"
+        >
+          <div className="relative w-10 h-10 md:w-12 md:h-12 transition-transform duration-300 group-hover:scale-105">
+            <Image
+              src="/logo.png"
+              alt="St Regis Hotel and Resort"
+              fill
+              className="object-contain"
+              priority
+            />
           </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden text-[#1e3a5f]"
+          <div
+            className={`hidden md:block transition-all duration-300 ${
+              isScrolled ? 'text-navy-900' : 'text-white'
+            }`}
           >
-            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            <span className="block text-xs font-bold uppercase tracking-widest">
+              St. Regis
+            </span>
+            <span className="block text-[10px] uppercase tracking-wider opacity-80">
+              Hotel & Resort
+            </span>
+          </div>
+        </button>
+
+        {/* Desktop Navigation */}
+        <div className="hidden lg:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <button
+              key={link.href}
+              onClick={() => scrollToSection(link.href)}
+              className={`text-sm font-medium uppercase tracking-wide transition-all duration-300 relative group ${
+                isScrolled ? 'text-navy-900' : 'text-white/90'
+              } ${
+                activeSection === link.href.substring(1)
+                  ? 'text-gold font-semibold'
+                  : 'hover:text-gold'
+              }`}
+            >
+              {link.label}
+              <span
+                className={`absolute -bottom-2 left-0 h-0.5 bg-gold transition-all duration-300 ${
+                  activeSection === link.href.substring(1)
+                    ? 'w-full'
+                    : 'w-0 group-hover:w-full'
+                }`}
+              />
+            </button>
+          ))}
+          <button
+            onClick={() => scrollToSection('#contact')}
+            className={`px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 transform hover:scale-105 ${
+              isScrolled
+                ? 'bg-navy-900 text-white hover:bg-gold hover:shadow-gold'
+                : 'bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-gold hover:border-gold'
+            }`}
+          >
+            Book Now
           </button>
         </div>
 
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="lg:hidden mt-4 pb-4 border-t border-gray-200 pt-4">
-            <nav className="flex flex-col gap-4">
-              <button onClick={() => scrollToSection('about')} className="text-left text-[#1e3a5f] hover:text-[#c9a961]">
-                About
-              </button>
-              <button onClick={() => scrollToSection('rooms')} className="text-left text-[#1e3a5f] hover:text-[#c9a961]">
-                Rooms
-              </button>
-              <button onClick={() => scrollToSection('amenities')} className="text-left text-[#1e3a5f] hover:text-[#c9a961]">
-                Amenities
-              </button>
-              <button onClick={() => scrollToSection('gallery')} className="text-left text-[#1e3a5f] hover:text-[#c9a961]">
-                Gallery
-              </button>
-              <button onClick={() => scrollToSection('events')} className="text-left text-[#1e3a5f] hover:text-[#c9a961]">
-                Events
-              </button>
-              <a href="/offer" className="text-left text-[#1e3a5f] hover:text-[#c9a961]">
-                Offers
-              </a>
-              <button onClick={() => scrollToSection('contact')} className="text-left text-[#1e3a5f] hover:text-[#c9a961]">
-                Contact
-              </button>
-              <a href="tel:09060001732" className="flex items-center gap-2 text-[#1e3a5f]">
-                <Phone className="w-4 h-4" />
-                <span>0906 000 1732</span>
-              </a>
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className={`lg:hidden p-2 rounded-full transition-all duration-300 ${
+            isScrolled
+              ? 'text-navy-900 hover:bg-gray-100'
+              : 'text-white hover:bg-white/20'
+          }`}
+          aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+        >
+          {isMobileMenuOpen ? (
+            <X className="w-6 h-6" />
+          ) : (
+            <Menu className="w-6 h-6" />
+          )}
+        </button>
+      </nav>
+
+      {/* Mobile Menu Overlay */}
+      <div
+        className={`lg:hidden fixed inset-0 z-40 bg-white transition-all duration-500 ${
+          isMobileMenuOpen
+            ? 'opacity-100 visible'
+            : 'opacity-0 invisible pointer-events-none'
+        }`}
+      >
+        <div className="flex flex-col items-center justify-center h-full px-6">
+          <div className="flex flex-col items-center gap-8">
+            {navLinks.map((link, index) => (
               <button
-                onClick={() => window.location.href = '/#contact'}
-                className="bg-[#c9a961] text-white px-6 py-2.5 rounded-lg hover:bg-[#b89851] transition-all text-left"
+                key={link.href}
+                onClick={() => scrollToSection(link.href)}
+                className={`text-2xl font-serif font-medium text-navy-900 transition-all duration-500 hover:text-gold ${
+                  isMobileMenuOpen
+                    ? 'opacity-100 translate-y-0'
+                    : 'opacity-0 translate-y-8'
+                }`}
+                style={{
+                  transitionDelay: `${index * 50 + 200}ms`,
+                }}
               >
-                Book Now
+                {link.label}
               </button>
-            </nav>
+            ))}
+            <button
+              onClick={() => scrollToSection('#contact')}
+              className="mt-8 px-8 py-4 bg-gold text-white rounded-full text-sm font-bold uppercase tracking-widest hover:bg-navy-900 transition-colors duration-300 shadow-lg hover:shadow-gold"
+            >
+              Book Your Stay
+            </button>
           </div>
-        )}
+        </div>
       </div>
     </header>
   );

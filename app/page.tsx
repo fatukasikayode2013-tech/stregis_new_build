@@ -1,3 +1,5 @@
+'use client';
+
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -10,23 +12,53 @@ import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import CTA from './components/CTA';
 import Footer from './components/Footer';
+import { Reveal } from './components/Reveal';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white overflow-x-hidden">
       <Navbar />
-      <main>
+
+      <main className="overflow-hidden">
         <Hero />
-        <About />
-        <Rooms />
-        <Amenities />
-        <Gallery />
-        <Events />
-        <Club />
-        <Testimonials />
-        <Contact />
-        <CTA />
+
+        <Reveal>
+          <About />
+        </Reveal>
+
+        <Reveal>
+          <Rooms />
+        </Reveal>
+
+        <Reveal>
+          <Amenities />
+        </Reveal>
+
+        <Reveal>
+          <Gallery />
+        </Reveal>
+
+        <Reveal>
+          <Events />
+        </Reveal>
+
+        <Reveal>
+          <Club />
+        </Reveal>
+
+        <Reveal>
+          <Testimonials />
+        </Reveal>
+
+        <Reveal>
+          <Contact />
+        </Reveal>
+
+        <Reveal>
+          <CTA />
+        </Reveal>
       </main>
+
       <Footer />
     </div>
   );

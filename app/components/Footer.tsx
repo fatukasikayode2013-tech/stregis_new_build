@@ -1,235 +1,201 @@
-'use client'
+'use client';
 
+import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Facebook, Instagram, Twitter, Mail, Phone, MapPin, Youtube, Linkedin, Globe } from 'lucide-react';
+import Link from 'next/link';
+import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from 'lucide-react';
+
+const currentYear = new Date().getFullYear();
+
+const quickLinks = [
+  { href: '#about', label: 'About Us' },
+  { href: '#rooms', label: 'Accommodations' },
+  { href: '#amenities', label: 'Amenities' },
+  { href: '#gallery', label: 'Gallery' },
+  { href: '#contact', label: 'Contact' },
+];
+
+const socialLinks = [
+  { icon: Facebook, href: '#', label: 'Facebook' },
+  { icon: Instagram, href: '#', label: 'Instagram' },
+  { icon: Twitter, href: '#', label: 'Twitter' },
+];
 
 export default function Footer() {
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
-    <footer className="bg-[#0f1f35] text-white">
-      <div className="container mx-auto px-4 lg:px-8 py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-          {/* Logo & Description */}
-          <div>
-            <div className="mb-4 flex items-center gap-3">
-              <Image src="/logo.png" alt="St Regis Logo" width={120} height={48} className="h-12 w-auto" />
+    <footer className="bg-navy-900 text-white relative overflow-hidden">
+      {/* Decorative elements */}
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-gold/5 rounded-full blur-3xl" />
+
+      <div className="container mx-auto px-6 relative">
+        {/* Main Footer Content */}
+        <div className="py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+          {/* Brand Column */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <div className="relative w-10 h-10">
+                <Image
+                  src="/logo.png"
+                  alt="St. Regis Hotel and Resort"
+                  fill
+                  className="object-contain"
+                />
+              </div>
               <div>
-                <h3 className="text-3xl font-serif" style={{ fontFamily: 'Playfair Display, serif' }}>
+                <span className="block text-sm font-bold uppercase tracking-widest">
                   St. Regis
-                </h3>
-                <p className="text-[#c9a961] text-sm tracking-widest">HOTEL & RESORT</p>
+                </span>
+                <span className="block text-[10px] uppercase tracking-wider text-white/60">
+                  Hotel & Resort
+                </span>
               </div>
             </div>
-            <p className="text-gray-400 mb-6">
-              Experience unparalleled luxury and sophistication at St Regis Hotel and Resort. Your destination for world-class hospitality.
+            <p className="text-white/60 text-sm leading-relaxed mb-6">
+              Experience the pinnacle of luxury hospitality in the heart of
+              Benin City. Where every moment becomes a cherished memory.
             </p>
-            <div className="flex flex-wrap gap-4">
-              <a
-                href="https://www.facebook.com/profile.php?id=61578125221131"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#c9a961] transition-colors"
-                title="Facebook"
-              >
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a
-                href="https://www.instagram.com/stregisnaomisgarden/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#c9a961] transition-colors"
-                title="Instagram"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a
-                href="https://x.com/stregisHotelB"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#c9a961] transition-colors"
-                title="Twitter/X"
-              >
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a
-                href="https://youtu.be/lHo9gUsAz2Q"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#c9a961] transition-colors"
-                title="YouTube"
-              >
-                <Youtube className="w-5 h-5" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/st-regis-hotel-and-resorts-632801195/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#c9a961] transition-colors"
-                title="LinkedIn"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a
-                href="https://www.threads.com/@stregisnaomisgarden"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#c9a961] transition-colors text-xs font-bold"
-                title="Threads"
-              >
-                @
-              </a>
-              <a
-                href="https://www.tiktok.com/@st.regis.hotels.r"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#c9a961] transition-colors font-bold"
-                title="TikTok"
-              >
-                TK
-              </a>
-              <a
-                href="https://www.pinterest.com/stregishotelsandresorts/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#c9a961] transition-colors text-xs font-bold"
-                title="Pinterest"
-              >
-                P
-              </a>
-              <a
-                href="https://stregishotelandresort.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#c9a961] transition-colors"
-                title="Website"
-              >
-                <Globe className="w-5 h-5" />
-              </a>
+            {/* Social Links */}
+            <div className="flex gap-4">
+              {socialLinks.map((social) => (
+                <motion.a
+                  key={social.label}
+                  href={social.href}
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-gold hover:border-gold transition-colors duration-300"
+                  aria-label={social.label}
+                >
+                  <social.icon className="w-4 h-4" />
+                </motion.a>
+              ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Quick Links */}
-          <div>
-            <h4 className="text-xl mb-6 text-white">Quick Links</h4>
-            <ul className="space-y-3">
-              <li>
-                <button
-                  onClick={() => scrollToSection('hero')}
-                  className="text-gray-400 hover:text-[#c9a961] transition-colors"
-                >
-                  Home
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollToSection('about')}
-                  className="text-gray-400 hover:text-[#c9a961] transition-colors"
-                >
-                  About Us
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollToSection('rooms')}
-                  className="text-gray-400 hover:text-[#c9a961] transition-colors"
-                >
-                  Rooms & Suites
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollToSection('amenities')}
-                  className="text-gray-400 hover:text-[#c9a961] transition-colors"
-                >
-                  Amenities
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollToSection('gallery')}
-                  className="text-gray-400 hover:text-[#c9a961] transition-colors"
-                >
-                  Gallery
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollToSection('events')}
-                  className="text-gray-400 hover:text-[#c9a961] transition-colors"
-                >
-                  Events
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollToSection('contact')}
-                  className="text-gray-400 hover:text-[#c9a961] transition-colors"
-                >
-                  Book A Stay
-                </button>
-              </li>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
+            <h4 className="text-sm font-bold uppercase tracking-widest text-gold mb-6">
+              Quick Links
+            </h4>
+            <ul className="space-y-4">
+              {quickLinks.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="text-white/60 hover:text-gold transition-colors duration-300 text-sm flex items-center gap-2 group"
+                  >
+                    <span className="w-0 group-hover:w-4 h-px bg-gold transition-all duration-300" />
+                    {link.label}
+                  </a>
+                </li>
+              ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Contact Info */}
-          <div className="lg:col-start-3">
-            <h4 className="text-xl mb-6 text-white">Contact Us</h4>
-            <div className="space-y-4">
-              <div className="flex gap-3 items-start">
-                <MapPin className="w-5 h-5 text-[#c9a961] flex-shrink-0 mt-1" />
-                <p className="text-gray-400 text-sm">
-                  7 Osagiede Street, Oka, Benin City, Edo State, Nigeria
-                </p>
-              </div>
-              <div className="flex gap-3 items-center">
-                <Phone className="w-5 h-5 text-[#c9a961] flex-shrink-0" />
-                <a href="tel:09060001732" className="text-gray-400 hover:text-[#c9a961] transition-colors">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            <h4 className="text-sm font-bold uppercase tracking-widest text-gold mb-6">
+              Contact
+            </h4>
+            <ul className="space-y-4">
+              <li className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" />
+                <span className="text-white/60 text-sm">
+                  7 Osagiede Street, Oka
+                  <br />
+                  Benin City, Nigeria
+                </span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Phone className="w-5 h-5 text-gold flex-shrink-0" />
+                <a
+                  href="tel:09060001732"
+                  className="text-white/60 hover:text-gold transition-colors text-sm"
+                >
                   0906 000 1732
                 </a>
-              </div>
-              <div className="flex gap-3 items-center">
-                <Mail className="w-5 h-5 text-[#c9a961] flex-shrink-0" />
-                <div className="flex flex-col space-y-1">
-                  <a href="mailto:info@stregishotelandresort.com" className="text-gray-400 text-sm sm:text-base hover:text-[#c9a961] transition-colors truncate max-w-[260px] sm:max-w-full">
-                    info@stregishotelandresort.com
-                  </a>
-                  <a href="mailto:reservations@stregishotelandresort.com" className="text-gray-400 text-sm sm:text-base hover:text-[#c9a961] transition-colors truncate max-w-[260px] sm:max-w-full">
-                    reservations@stregishotelandresort.com
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Hours */}
-          <div>
-            <h4 className="text-xl mb-6 text-white">Hours</h4>
-            <ul className="space-y-3 text-gray-400">
-              <li>Reception: 24/7</li>
-              <li>Restaurant: 6 AM - 11 PM</li>
-              <li>Pool: 6 AM - 8 PM</li>
+              </li>
+              <li className="flex items-center gap-3">
+                <Mail className="w-5 h-5 text-gold flex-shrink-0" />
+                <a
+                  href="mailto:info@stregishotelandresort.com"
+                  className="text-white/60 hover:text-gold transition-colors text-sm"
+                >
+                  info@stregishotelandresort.com
+                </a>
+              </li>
             </ul>
-          </div>
+          </motion.div>
+
+          {/* Newsletter */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+          >
+            <h4 className="text-sm font-bold uppercase tracking-widest text-gold mb-6">
+              Newsletter
+            </h4>
+            <p className="text-white/60 text-sm leading-relaxed mb-6">
+              Subscribe to receive exclusive offers and updates on our latest
+              offerings.
+            </p>
+            <form className="flex flex-col sm:flex-row gap-3">
+              <input
+                type="email"
+                placeholder="Your email"
+                className="flex-1 min-w-0 bg-white/5 border border-white/10 rounded-full px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none focus:border-gold transition-colors"
+              />
+              <motion.button
+                type="submit"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-gold text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-gold-dark transition-colors whitespace-nowrap"
+              >
+                Subscribe
+              </motion.button>
+            </form>
+          </motion.div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/10 pt-8">
+        <div className="border-t border-white/10 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-400 text-sm">
-              © 2026 St. Regis Hotel & Resort. All rights reserved.
+            <p className="text-white/40 text-sm">
+              © {currentYear} St. Regis Hotel and Resort. All rights reserved.
             </p>
-            <div className="flex gap-6 text-sm">
-              <a href="#" className="text-gray-400 hover:text-[#c9a961] transition-colors">
+            <div className="flex gap-8">
+              <a
+                href="#"
+                className="text-white/40 hover:text-gold transition-colors text-sm"
+              >
                 Privacy Policy
               </a>
-              <a href="#" className="text-gray-400 hover:text-[#c9a961] transition-colors">
+              <a
+                href="#"
+                className="text-white/40 hover:text-gold transition-colors text-sm"
+              >
                 Terms of Service
+              </a>
+              <a
+                href="#"
+                className="text-white/40 hover:text-gold transition-colors text-sm"
+              >
+                Sitemap
               </a>
             </div>
           </div>

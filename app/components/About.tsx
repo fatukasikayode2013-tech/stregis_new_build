@@ -1,98 +1,142 @@
-'use client'
+'use client';
 
+import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { MapPin, Users, Award, Briefcase } from 'lucide-react';
+import { Reveal } from './Reveal';
 
 export default function About() {
-  const highlights = [
-    {
-      icon: MapPin,
-      title: 'Prime Location',
-      description: 'Strategically located in the heart of Benin City',
-    },
-    {
-      icon: Award,
-      title: 'Comfortable Rooms',
-      description: 'Elegantly designed rooms with modern amenities',
-    },
-    {
-      icon: Users,
-      title: 'Professional Service',
-      description: 'Dedicated team committed to excellence',
-    },
-    {
-      icon: Briefcase,
-      title: 'Business & Leisure',
-      description: 'Perfect for both corporate and vacation stays',
-    },
-  ];
-
   return (
-    <section id="about" className="py-20 lg:py-28 bg-[#f5f3ee] relative overflow-hidden">
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-10 left-10 w-32 h-32 bg-[#c9a961] rounded-full blur-3xl"></div>
-        <div className="absolute bottom-10 right-10 w-40 h-40 bg-[#1e3a5f] rounded-full blur-3xl"></div>
-      </div>
+    <section id="about" className="py-32 bg-cream relative overflow-hidden">
+      {/* Decorative background elements */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-gold/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-navy/5 rounded-full blur-3xl" />
 
-      <div className="container mx-auto px-4 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Image */}
-          <div className="order-2 lg:order-1 relative">
-            <div className="relative w-full h-[500px]">
-              {/* Floating Badge */}
-              <div className="absolute top-4 left-4 bg-[#c9a961] text-white px-4 py-2 rounded-lg shadow-lg z-20">
-                <span className="text-sm font-semibold">15+ Years</span>
-              </div>
-              {/* Thick white border */}
-              <div className="absolute inset-0 bg-white rounded-2xl shadow-2xl p-2">
+      <div className="container mx-auto px-6 relative">
+        <div className="grid lg:grid-cols-2 gap-20 items-center">
+          {/* Image Side */}
+          <Reveal direction="left">
+            <div className="relative">
+              {/* Main image with frame */}
+              <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
                 <Image
-                  src="/images/IMG-20260214-WA0260.jpg.jpeg"
-                  alt="Hotel Lobby"
+                  src="/images/presidential.jpeg"
+                  alt="St. Regis Hotel Interior"
                   fill
-                  className="object-cover rounded-xl"
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
+                {/* Overlay gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+              </div>
+
+              {/* Decorative frame */}
+              <div className="absolute -bottom-6 -right-6 w-48 h-48 border-r-2 border-b-2 border-gold/30 rounded-br-3xl" />
+              <div className="absolute -top-6 -left-6 w-48 h-48 border-l-2 border-t-2 border-gold/30 rounded-tl-3xl" />
+
+              {/* Experience badge */}
+              <div className="absolute -bottom-4 -right-4 bg-white p-6 rounded-2xl shadow-xl">
+                <div className="text-center">
+                  <span className="block text-4xl font-serif text-gold">20+</span>
+                  <span className="text-xs uppercase tracking-widest text-navy-900">
+                    Years of Excellence
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
+          </Reveal>
 
-          {/* Content */}
-          <div className="order-1 lg:order-2">
-            <p className="text-[#c9a961] tracking-widest mb-4">WELCOME TO ST. REGIS</p>
-            <h2
-              className="text-5xl lg:text-6xl text-[#1e3a5f] mb-6 leading-tight"
-              style={{ fontFamily: 'Playfair Display, serif' }}
-            >
-              Where Luxury Meets <span className="text-[#c9a961] italic">Nigerian Hospitality</span>
-            </h2>
-            <p className="text-gray-700 mb-6 leading-relaxed text-lg">
-              Nestled in the vibrant city of Benin, St. Regis Hotel & Resort offers a perfect blend of elegance and comfort. Our commitment to excellence ensures every guest experiences the finest in Nigerian hospitality.
-            </p>
-            <p className="text-gray-700 mb-8 leading-relaxed text-lg">
-              Whether you're visiting for business or leisure, our carefully curated amenities, exceptional service, and prime location make us the ideal choice for discerning travelers.
-            </p>
+          {/* Content Side */}
+          <Reveal direction="right">
+            <div className="lg:pl-12">
+              {/* Section label */}
+              <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-gold block mb-6">
+                Our Story
+              </span>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-              {highlights.map((item, index) => (
-                <div key={index} className="flex gap-4 group">
-                  <div className="flex-shrink-0">
-                    <div className="w-12 h-12 bg-[#c9a961] group-hover:bg-[#1e3a5f] rounded-lg flex items-center justify-center transition-colors duration-300">
-                      <item.icon className="w-6 h-6 text-white" />
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-[#1e3a5f] mb-1 font-semibold">{item.title}</h3>
-                    <p className="text-gray-600 text-sm">{item.description}</p>
-                  </div>
-                </div>
-              ))}
+              {/* Title */}
+              <h2 className="text-5xl lg:text-6xl font-serif text-navy-900 mb-8 leading-tight">
+                A Legacy of{' '}
+                <span className="italic text-gold">Excellence</span>
+              </h2>
+
+              {/* Divider */}
+              <div className="w-20 h-0.5 bg-gold mb-8" />
+
+              {/* Description paragraphs */}
+              <div className="space-y-6 text-gray-600 leading-relaxed">
+                <p className="text-lg">
+                  Nestled in the heart of Benin City, St. Regis Hotel and Resort
+                  stands as a beacon of luxury and sophistication. Our
+                  establishment combines timeless elegance with modern amenities
+                  to create an unparalleled hospitality experience.
+                </p>
+                <p>
+                  Every corner of our hotel tells a story of refined taste and
+                  attention to detail. From the moment you step through our
+                  doors, you'll be enveloped in an atmosphere of grace and
+                  tranquility, where every need is anticipated and every desire
+                  is catered to with discretion and care.
+                </p>
+                <p>
+                  Our commitment to excellence extends beyond luxurious
+                  accommodations. We pride ourselves on offering world-class
+                  dining experiences, rejuvenating spa treatments, and
+                  impeccable service that has become the hallmark of the St.
+                  Regis name.
+                </p>
+              </div>
+
+              {/* Features list */}
+              <div className="mt-12 grid grid-cols-2 gap-6">
+                {[
+                  '24/7 Concierge Service',
+                  'Fine Dining Restaurant',
+                  'Luxury Spa & Wellness',
+                  'Event & Conference Facilities',
+                ].map((feature, index) => (
+                  <motion.div
+                    key={index}
+                    className="flex items-center gap-3"
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <div className="w-2 h-2 bg-gold rounded-full" />
+                    <span className="text-sm text-navy-900 font-medium">
+                      {feature}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* CTA */}
+              <motion.div
+                className="mt-12"
+                whileHover={{ x: 5 }}
+              >
+                <a
+                  href="#contact"
+                  className="inline-flex items-center gap-3 text-gold font-medium uppercase tracking-widest text-sm hover:text-navy-900 transition-colors"
+                >
+                  Discover More
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
+                  </svg>
+                </a>
+              </motion.div>
             </div>
-
-            {/* CTA Button */}
-            <button className="bg-[#c9a961] hover:bg-[#1e3a5f] text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-300">
-              Discover More
-            </button>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>
