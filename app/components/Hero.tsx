@@ -73,8 +73,8 @@ export default function Hero() {
             key={i}
             className="absolute w-[2px] h-[2px] bg-gold/40 rounded-full"
             initial={{
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
+              x: (typeof window !== 'undefined') ? Math.random() * window.innerWidth : Math.random() * 1024,
+              y: (typeof window !== 'undefined') ? Math.random() * window.innerHeight : Math.random() * 768,
               opacity: 0,
             }}
             animate={{
