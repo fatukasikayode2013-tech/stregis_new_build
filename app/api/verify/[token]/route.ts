@@ -6,9 +6,13 @@ import { getRoomDetails } from '../../../../app/lib/roomData';
 const INFO_EMAIL = 'info@stregishotelandresort.com';
 const RESERVATIONS_EMAIL = 'reservations@stregishotelandresort.com';
 
-export async function GET(request: Request, { params }: { params: { token: string } }) {
+export async function GET(request: any, context: any) {
   try {
-    const token = params.token;
+    // `context.params` may be a Promise in some Next versions or an object.
+    const resolvedParams = context && context.params
+      ? (typeof context.params.then === 'function' ? await context.params : context.params)
+      : undefined;
+    const token = resolvedParams?.token || '';
     const query = new URL(request.url).searchParams;
 
     // try reading stored reservation (may not exist in serverless env)

@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+import type SMTPTransport from 'nodemailer/lib/smtp-transport';
 import { NextResponse } from 'next/server';
 import { randomUUID } from 'crypto';
 import { saveReservation } from '../../lib/reservations';
@@ -40,14 +41,16 @@ export async function POST(request: Request) {
     // do not persist reservation; serverless runtime resets on every invocation
     const host = process.env.SMTP_HOST || process.env.ZOHO_HOST || 'smtp.zoho.com';
     const port = parseInt(process.env.SMTP_PORT || process.env.ZOHO_PORT || '587', 10);
-    const secure = (process.env.SMTP_SECURE || process.env.ZOHO_SECURE === 'true') || port === 465;
+    const secure = (process.env.SMTP_SECURE === 'true' || process.env.ZOHO_SECURE === 'true') || port === 465;
 
-    const transporter = nodemailer.createTransport({
+    const transportOptions: SMTPTransport.Options = {
       host,
       port,
       secure,
       auth: { user, pass },
-    });
+    };
+
+    const transporter = nodemailer.createTransport(transportOptions);
 
     const verifyUrl = `${siteUrl.replace(/\/$/, '')}/api/verify/${token}?${params.toString()}`;
 

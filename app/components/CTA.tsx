@@ -13,16 +13,16 @@ export default function CTA() {
   return (
     <section className="relative py-28 lg:py-40 bg-[#0A111F] overflow-hidden">
       {/* Sophisticated Glow Effect */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-[#c9a961]/10 blur-[120px] rounded-full pointer-events-none"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-[#c9a961]/10 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           
           {/* Subtle Branding Accent */}
           <div className="flex justify-center items-center gap-3 mb-8">
-            <div className="h-[1px] w-8 bg-[#c9a961]/40"></div>
+            <div className="h-[1px] w-8 bg-[#c9a961]/40" />
             <Star className="w-4 h-4 text-[#c9a961] fill-[#c9a961]" />
-            <div className="h-[1px] w-8 bg-[#c9a961]/40"></div>
+            <div className="h-[1px] w-8 bg-[#c9a961]/40" />
           </div>
 
           <h2

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Users, Maximize, ArrowRight, ChevronLeft, ChevronRight, Wifi, Coffee, Tv, Wind, Check, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';

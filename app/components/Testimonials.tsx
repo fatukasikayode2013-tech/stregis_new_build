@@ -43,7 +43,7 @@ export default function Testimonials() {
             What Our Guests Say
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-            Don't just take our word for it. Here's what our valued guests have to say about their experience.
+            Don&apos;t just take our word for it. Here&apos;s what our valued guests have to say about their experience.
           </p>
         </div>
 
@@ -56,7 +56,7 @@ export default function Testimonials() {
                 ))}
               </div>
 
-              <p className="text-gray-700 mb-6 leading-relaxed italic">"{testimonial.content}"</p>
+              <p className="text-gray-700 mb-6 leading-relaxed italic">&ldquo;{testimonial.content}&rdquo;</p>
 
               <div>
                 <p className="text-[#1e3a5f] font-semibold">{testimonial.name}</p>

@@ -21,8 +21,8 @@ export default function Club() {
       />
       
       {/* Dynamic Overlays: Deep vignette for that "Midnight" feel */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent"></div>
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
 
       {/* Decorative Large Watermark */}
       <div className="absolute -right-20 top-1/2 -translate-y-1/2 rotate-90 opacity-[0.03] pointer-events-none select-none">
@@ -33,7 +33,7 @@ export default function Club() {
         <div className="max-w-2xl">
           {/* Tagline */}
           <div className="flex items-center gap-4 mb-6">
-            <div className="h-[1px] w-12 bg-[#c9a961]"></div>
+            <div className="h-[1px] w-12 bg-[#c9a961]" />
             <span className="text-[10px] font-bold tracking-[0.5em] text-[#c9a961] uppercase">
               Exclusive Lounge & Club
             </span>

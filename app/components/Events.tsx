@@ -30,7 +30,7 @@ export default function Events() {
           <div className="lg:col-span-7 relative order-2 lg:order-1">
             <div className="relative aspect-[16/10] group">
               {/* The "Frame" */}
-              <div className="absolute -inset-4 border border-gray-100 rounded-[2rem] -z-10 transition-transform duration-700 group-hover:scale-105"></div>
+              <div className="absolute -inset-4 border border-gray-100 rounded-[2rem] -z-10 transition-transform duration-700 group-hover:scale-105" />
               
               <div className="h-full w-full rounded-2xl overflow-hidden shadow-2xl relative">
                 <video
@@ -44,7 +44,7 @@ export default function Events() {
                 
                 {/* Minimal Overlay Data */}
                 <div className="absolute top-8 left-8 bg-white/90 backdrop-blur-md px-5 py-3 rounded-full shadow-sm flex items-center gap-3">
-                  <div className="w-2 h-2 rounded-full bg-[#c9a961] animate-pulse"></div>
+                  <div className="w-2 h-2 rounded-full bg-[#c9a961] animate-pulse" />
                   <span className="text-[10px] font-bold tracking-[0.2em] text-[#1e3a5f] uppercase">The Grand Ballroom</span>
                 </div>
               </div>

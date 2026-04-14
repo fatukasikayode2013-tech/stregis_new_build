@@ -1,6 +1,6 @@
-'use client';
+ 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail, Clock, Send, CheckCircle, Loader2, Calendar, User, AtSign, MessageSquare } from 'lucide-react';
 import { Reveal } from './Reveal';

@@ -73,7 +73,7 @@ export default function About() {
                 <p>
                   Every corner of our hotel tells a story of refined taste and
                   attention to detail. From the moment you step through our
-                  doors, you'll be enveloped in an atmosphere of grace and
+                  doors, you&apos;ll be enveloped in an atmosphere of grace and
                   tranquility, where every need is anticipated and every desire
                   is catered to with discretion and care.
                 </p>

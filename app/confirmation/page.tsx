@@ -35,7 +35,7 @@ export default function ConfirmationPage() {
       <div className="min-h-screen bg-[#FCFBF8]">
         {/* Header Section */}
         <section className="pt-32 pb-16 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#c9a961]/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#c9a961]/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
           
           <div className="container mx-auto px-6 lg:px-12 text-center relative z-10">
             <div className="w-16 h-16 bg-[#c9a961] rounded-full flex items-center justify-center mx-auto mb-8 shadow-2xl">
@@ -93,7 +93,7 @@ export default function ConfirmationPage() {
                             <p className="text-[9px] uppercase tracking-widest text-gray-400 mb-1">In</p>
                             <p className="text-[#1e3a5f] font-bold">{details.checkin}</p>
                           </div>
-                          <div className="h-8 w-[1px] bg-gray-200"></div>
+                          <div className="h-8 w-[1px] bg-gray-200" />
                           <div className="text-center">
                             <p className="text-[9px] uppercase tracking-widest text-gray-400 mb-1">Out</p>
                             <p className="text-[#1e3a5f] font-bold">{details.checkout}</p>
