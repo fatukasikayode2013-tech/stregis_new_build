@@ -2,6 +2,7 @@
 
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import LuxuryHighlights from './components/LuxuryHighlights';
 import About from './components/About';
 import Rooms from './components/Rooms';
 import Amenities from './components/Amenities';
@@ -22,6 +23,8 @@ export default function Home() {
 
       <main className="overflow-hidden">
         <Hero />
+
+        <LuxuryHighlights />
 
         <Reveal>
           <About />
