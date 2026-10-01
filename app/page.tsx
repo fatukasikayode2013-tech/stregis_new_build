@@ -12,6 +12,7 @@ import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import CTA from './components/CTA';
 import Footer from './components/Footer';
+import StickyBookBar from './components/StickyBookBar';
 import { Reveal } from './components/Reveal';
 
 export default function Home() {
@@ -60,6 +61,7 @@ export default function Home() {
       </main>
 
       <Footer />
+      <StickyBookBar />
     </div>
   );
 }
